@@ -17,8 +17,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// JWT Secret Key (use environment variable in production)
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
 
 // Middleware
 app.use(cors());
