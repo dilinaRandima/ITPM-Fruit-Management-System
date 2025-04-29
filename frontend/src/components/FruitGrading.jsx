@@ -387,6 +387,7 @@ const FruitGrading = () => {
     
     setIsLoading(true);
     setUploadStatus('Uploading image...');
+    setPreviewUrl('loading');
 
     try {
       const data = new FormData();
@@ -598,10 +599,14 @@ const FruitGrading = () => {
             {formErrors.image && <span className="error-message">{formErrors.image}</span>}
             
             {previewUrl && (
-              <div className="image-preview">
-                <img src={previewUrl} alt="Preview" />
-              </div>
-            )}
+  <div className="image-preview">
+    {previewUrl === 'loading' ? (
+      <div className="loading-preview">Loading image preview...</div>
+    ) : (
+      <img src={previewUrl} alt="Preview" />
+    )}
+  </div>
+)}
           </div>
           
           <button type="submit" disabled={isLoading}>
