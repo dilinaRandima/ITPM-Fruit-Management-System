@@ -1,0 +1,266 @@
+/* Enhanced index.css that complements the fruit theme colors */
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+body {
+  margin: 0;
+  font-family: 'Canva Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #555555;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  background-color: #f9f7e8;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #555555;
+}
+
+/* Global link styling */
+a {
+  color: #a4bc5a;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #8aa548;
+  text-decoration: underline;
+}
+
+/* Selection styling */
+::selection {
+  background-color: rgba(164, 188, 90, 0.2);
+  color: #555555;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f9f7e8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a4bc5a;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8aa548;
+}
+
+/* Common utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Text styling for the fruit theme */
+.text-green {
+  color: #a4bc5a;
+}
+
+.text-yellow {
+  color: #f2cf4a;
+}
+
+.text-red {
+  color: #b43b3b;
+}
+
+/* Heading styling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'League Spartan', sans-serif;
+  color: #333;
+}
+
+/* Smooth transitions for page elements */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus outline for accessibility */
+button:focus, 
+a:focus, 
+input:focus, 
+select:focus, 
+textarea:focus {
+  outline: 2px solid rgba(164, 188, 90, 0.5);
+  outline-offset: 2px;
+}
+
+/* Button reset */
+button {
+  cursor: pointer;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Container for content */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Prevent text overflow */
+h1, h2, h3, h4, h5, h6, p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Custom gradient backgrounds */
+.bg-fruit-gradient {
+  background: linear-gradient(to right, rgba(164, 188, 90, 0.1), rgba(242, 207, 74, 0.1));
+}
+
+.bg-light {
+  background-color: #f9f7e8;
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #a4bc5a;
+  border: 2px solid #a4bc5a;
+}
+
+.btn-secondary:hover {
+  background: #f9f7e8;
+  transform: translateY(-3px);
+}
+
+.btn-danger {
+  background: linear-gradient(45deg, #b43b3b, #d13c3c);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(180, 59, 59, 0.3);
+}
+
+.btn-danger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(180, 59, 59, 0.4);
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: none;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.card-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  body {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#a4bc5a" />
+    <meta
+      name="description"
+      content="FRESH ROUTE - Fruit Management System"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>FRESH ROUTE - Fruit Management System</title>
+    <style>
+      /* This will hide any elements with this text */
+      body > *:not(#root):contains("Powered by AI background removal") {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- Remove any elements added after the root -->
+    <script>
+      // This will remove any elements that might be added outside your React app
+      document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.body.childNodes;
+        for (let i = elements.length - 1; i >= 0; i--) {
+          const el = elements[i];
+          if (el.id !== 'root' && el.nodeName !== 'SCRIPT') {
+            if (el.textContent && el.textContent.includes('Powered by AI background')) {
+              el.parentNode.removeChild(el);
+            }
+          }
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,700 @@
+/* src/App.css - Updated to match HomePage style */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header styling */
+/* ====== ENHANCED HEADER STYLES ====== */
+
+/* Main header container */
+.App-header {
+  background-color: rgba(255, 255, 255, 0.97);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  border-bottom: none;
+  background-image: linear-gradient(to right, transparent, rgba(164, 188, 90, 0.05), transparent);
+  position: relative;
+}
+
+.App-header:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Left section with logo */
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInLeft 0.8s ease forwards;
+}
+
+/* Logo image with animation */
+.logo-image {
+  height: 75px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+}
+
+.logo-image:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
+}
+
+/* Add a subtle green glow animation for the logo */
+@keyframes greenPulse {
+  0% {
+    filter: drop-shadow(0 0 1px rgba(164, 188, 90, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(164, 188, 90, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 1px rgba(164, 188, 90, 0));
+  }
+}
+
+.App-header:hover .logo-image {
+  animation: greenPulse 2s infinite;
+}
+
+/* Center content with title and subtitle - FIXED */
+.header-content {
+  text-align: center;
+  padding: 0;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInDown 0.8s ease forwards;
+  animation-delay: 0.2s;
+  grid-column: 2;
+  width: auto;
+  margin: 0 auto;
+}
+
+.App-header:hover .header-content {
+  transform: translateY(-2px);
+}
+
+/* Header title animation */
+.App-header h1 {
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  transition: all 0.3s ease;
+  background-image: linear-gradient(45deg, #333, #555);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-size: 200% auto;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.App-header:hover h1 {
+  background-position: right center;
+}
+
+/* Header title underline animation */
+.App-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.App-header:hover h1::after {
+  width: 100px;
+  opacity: 1;
+}
+
+/* Subtitle animation */
+.tagline {
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  opacity: 0.8;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.App-header:hover .tagline {
+  opacity: 1;
+  transform: translateY(2px);
+}
+
+/* Right section with sign-in/sign-up buttons */
+.header-right {
+  display: flex;
+  gap: 12px;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  opacity: 0;
+  animation: fadeInRight 0.8s ease forwards;
+  animation-delay: 0.3s;
+  justify-content: flex-end;
+}
+
+.App-header:hover .header-right {
+  transform: translateY(-2px);
+}
+
+/* Sign-up button styles with animations */
+.sign-up-button {
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 2px solid #a4bc5a;
+  background-color: transparent;
+  color: #a4bc5a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.sign-up-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #a4bc5a;
+  transition: all 0.3s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+.sign-up-button:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(164, 188, 90, 0.2);
+}
+
+.sign-up-button:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+.sign-up-button.primary {
+  background-color: #a4bc5a;
+  color: white;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.2);
+}
+
+.sign-up-button.primary::before {
+  background-color: #8aa548;
+}
+
+/* Shine effect for primary button */
+.sign-up-button.primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.sign-up-button.primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.sign-up-button.primary:hover::after {
+  animation: shineEffect 1.5s infinite;
+}
+
+/* User greeting styles */
+.user-greeting {
+  color: #555;
+  font-weight: 500;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.user-greeting::before {
+  content: '👤';
+  margin-right: 5px;
+  font-size: 1.1rem;
+}
+
+/* Navigation Tabs Styles */
+.main-nav {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs {
+  display: flex;
+  list-style: none;
+  padding: 0 30px;
+  margin: 0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.nav-tab {
+  visibility: visible !important;
+  opacity: 1 !important;
+  padding: 15px 20px;
+  cursor: pointer;
+  color: #555;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  min-width: 100px !important;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.nav-tab:nth-child(1) {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.nav-tab:nth-child(2) {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.nav-tab:nth-child(3) {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.7s;
+}
+
+.nav-tab:nth-child(4) {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.nav-tab:nth-child(5) {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.nav-tab::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-tab:hover {
+  color: #a4bc5a;
+}
+
+.nav-tab:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-tab.active {
+  color: #a4bc5a;
+  border-color: #a4bc5a;
+}
+
+.nav-tab.active::before {
+  transform: scaleX(1);
+}
+
+.nav-icon {
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-tab:hover .nav-icon {
+  transform: scale(1.2);
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+/* Placeholder for incomplete features */
+.feature-placeholder {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.feature-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.feature-placeholder h2 {
+  color: #a4bc5a;
+  margin-bottom: 15px;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.feature-placeholder h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+  border-radius: 3px;
+}
+
+.feature-placeholder p {
+  color: #666;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Unauthorized access styles */
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 20px;
+  margin: 40px auto;
+  max-width: 600px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.unauthorized-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #b43b3b, #f56565);
+}
+
+.unauthorized-container h2 {
+  color: #b43b3b;
+  margin-bottom: 20px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.unauthorized-container p {
+  color: #555;
+  margin-bottom: 25px;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Loading spinner */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #a4bc5a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animation keyframes */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shineEffect {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  20% {
+    left: -100%;
+    opacity: 1;
+  }
+  80% {
+    left: 100%;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Header scroll effect */
+.App-header.scrolled {
+  padding: 8px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+}
+
+.App-header.scrolled .logo-image {
+  height: 60px;
+}
+
+.App-header.scrolled .header-content h1 {
+  font-size: 1.2rem;
+}
+
+.App-header.scrolled .tagline {
+  font-size: 0.8rem;
+}
+
+.App-header.scrolled .sign-up-button {
+  padding: 6px 15px;
+  font-size: 0.85rem;
+}
+
+/* Ensure smooth transitions */
+.App-header * {
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .header-left, .header-content, .header-right {
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .logo-image {
+    height: 60px;
+  }
+  
+  .header-content {
+    margin: 15px 0;
+  }
+  
+  .App-header h1::after {
+    bottom: -3px;
+  }
+  
+  .nav-tabs {
+    overflow-x: auto;
+    padding: 0 15px;
+  }
+  
+  .nav-tab {
+    padding: 15px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .logo-image {
+    height: 80px; /* Slightly smaller on mobile but still large */
+  }
+  
+  .header-content {
+    margin-top: 10px;
+  }
+  
+  .nav-tabs {
+    overflow-x: auto;
+    padding: 0 15px;
+  }
+  
+  .nav-tab {
+    padding: 15px 10px;
+    font-size: 0.9rem;
+  }
+  /* Add this to your App.css file */
+
+/* Tab Badge for Cart Count */
+.tab-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f2cf4a;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  padding: 0 4px;
+  animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+  0% {
+    box-shadow: 0 0 0 0 rgba(242, 207, 74, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(242, 207, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(242, 207, 74, 0);
+  }
+}
+
+/* Update to make nav-tab position relative for badge positioning */
+.nav-tab {
+  position: relative;
+  /* Keep all other existing styles */
+}
+}

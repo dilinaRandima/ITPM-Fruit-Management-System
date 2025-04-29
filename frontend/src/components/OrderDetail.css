@@ -1,0 +1,694 @@
+/* src/components/OrderDetail.css */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.order-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: linear-gradient(to right, #f9f9f9, #f0f0f0);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #444;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: fadeIn 0.6s forwards 0.2s;
+  opacity: 0;
+}
+
+.back-link:hover {
+  background-color: #f0f0f0;
+  border-color: #a4bc5a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Order detail title */
+.order-detail-title {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideInDown 0.8s forwards 0.2s;
+}
+
+.order-detail-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Success and Error Messages */
+.success-message,
+.error-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-family: 'Canva Sans', sans-serif;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.success-message {
+  background-color: #f0fff4;
+  color: #38a169;
+  border-left: 5px solid #38a169;
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-left: 5px solid #e53e3e;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: 'League Spartan', sans-serif;
+  color: #555;
+  font-size: 18px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.loading-indicator::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border: 3px solid #e2e8f0;
+  border-radius: 50%;
+  border-top-color: #a4bc5a;
+  animation: spin 1s linear infinite;
+}
+
+/* Not Found Message */
+.not-found-message {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  animation: fadeIn 0.8s forwards 0.5s;
+  opacity: 0;
+}
+
+.not-found-icon {
+  font-size: 80px;
+  color: #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.not-found-message p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.back-to-orders-button {
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #4299e1, #3182ce);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(66, 153, 225, 0.2);
+}
+
+.back-to-orders-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(66, 153, 225, 0.3);
+}
+
+/* Order Detail Content */
+.order-detail-content {
+  opacity: 0;
+  animation: fadeIn 0.8s forwards 0.4s;
+}
+
+/* Order Header Section */
+.order-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.order-id-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0 0 5px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.order-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.order-status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #ebf8ff;
+  color: #3182ce;
+}
+
+.status-processing {
+  background-color: #e6fffa;
+  color: #38b2ac;
+}
+
+.status-shipped {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+
+.status-delivered {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.status-completed {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.status-canceled {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+/* Order Actions Top */
+.order-actions-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.order-total-badge {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #a4bc5a;
+  background-color: #f0f7e6;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.order-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.edit-order-button, 
+.cancel-order-button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.edit-order-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+}
+
+.edit-order-button:hover {
+  background: linear-gradient(45deg, #8aa548, #7a9238);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.3);
+}
+
+.cancel-order-button {
+  background: linear-gradient(45deg, #f56565, #e53e3e);
+  color: white;
+}
+
+.cancel-order-button:hover {
+  background: linear-gradient(45deg, #e53e3e, #c53030);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(229, 62, 62, 0.3);
+}
+
+/* Order Detail Card */
+.order-detail-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.order-detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.order-detail-section {
+  padding: 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-detail-section:last-child {
+  border-bottom: none;
+}
+
+.order-detail-section h3 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 600;
+}
+
+/* Order Items Table */
+.order-items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-items-table th {
+  text-align: left;
+  padding: 12px 15px;
+  background-color: #f8f8f8;
+  font-weight: 600;
+  color: #444;
+}
+
+.order-items-table td {
+  padding: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+}
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.order-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.order-item-grade {
+  font-size: 12px;
+  background-color: #f0f7e6;
+  color: #a4bc5a;
+  border-radius: 4px;
+  padding: 2px 6px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.order-items-table tfoot tr {
+  background-color: #f9f9f9;
+}
+
+.order-items-table tfoot td {
+  padding: 15px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.order-items-table tfoot td:last-child {
+  font-weight: 700;
+  color: #333;
+}
+
+.order-total-row td {
+  border-top: 2px solid #ddd;
+  color: #a4bc5a;
+  font-size: 1.1rem;
+}
+
+/* Order Info Sections */
+.order-info-sections {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.half-width {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .half-width {
+    flex: 100%;
+  }
+}
+
+.info-box {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #333;
+}
+
+.payment-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.payment-status.pending {
+  background-color: #ebf8ff;
+  color: #3182ce;
+}
+
+.payment-status.completed {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.payment-status.failed {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+/* Shipping Status */
+.shipping-status {
+  margin-top: 20px;
+}
+
+.shipping-status h4 {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.shipping-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shipping-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.step-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #edf2f7;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.shipping-step.active .step-icon {
+  background-color: #a4bc5a;
+  color: white;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3);
+}
+
+.step-label {
+  font-size: 12px;
+  color: #718096;
+  transition: all 0.3s ease;
+}
+
+.shipping-step.active .step-label {
+  color: #333;
+  font-weight: 600;
+}
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background-color: #edf2f7;
+  margin: 0 10px;
+  position: relative;
+  top: -15px;
+}
+
+/* Order Actions Bottom */
+.order-actions-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.print-order-button {
+  padding: 12px 30px;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.print-order-button:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Print styling */
+@media print {
+  .back-link,
+  .order-actions-top,
+  .order-actions-bottom,
+  .order-detail-title {
+    display: none !important;
+  }
+  
+  .order-detail-container {
+    padding: 0;
+  }
+  
+  .order-detail-card {
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+  
+  .order-detail-card::before {
+    display: none;
+  }
+  
+  .order-header-section {
+    margin-top: 20px;
+  }
+  
+  /* Add a proper header for the printed receipt */
+  body::before {
+    content: "Fresh Route Fruit Management System - Order Details";
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .order-detail-container {
+    padding: 20px;
+  }
+  
+  .order-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .order-status-badge {
+    margin-top: 10px;
+  }
+  
+  .order-actions-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .order-buttons {
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .edit-order-button,
+  .cancel-order-button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-items-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .order-actions-bottom {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .back-to-orders-button,
+  .print-order-button {
+    width: 100%;
+  }
+  
+  .shipping-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .shipping-step {
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .step-icon {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  
+  .step-connector {
+    width: 2px;
+    height: 20px;
+    margin: 5px 0 5px 14px;
+    top: 0;
+  }
+}

@@ -1,0 +1,864 @@
+/* Enhanced Dashboard.css with improved Fruit Types section */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.dashboard-container {
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Dashboard title with animation */
+.dashboard-title {
+  font-size: 2.5rem;
+  margin-bottom: 35px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideInDown 0.8s forwards 0.2s;
+}
+
+.dashboard-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Quality grading scale section with modern styling */
+.grade-scale-section {
+  text-align: center;
+  padding: 25px;
+  margin-bottom: 30px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideInUp 0.8s forwards 0.4s;
+}
+
+.grade-scale-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.grade-scale-title {
+  font-weight: 600;
+  color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.grade-badges {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.grade-badge-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.grade-badge-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.grade-badge-color {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  margin-right: 10px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grade-badge-color.grade-a {
+  background: linear-gradient(45deg, #10B981, #059669);
+}
+
+.grade-badge-color.grade-b {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.grade-badge-color.grade-c {
+  background: linear-gradient(45deg, #f2cf4a, #E9B949);
+}
+
+.grade-badge-color.grade-e {
+  background: linear-gradient(45deg, #f56565, #E53E3E);
+}
+
+.grade-badge-color.grade-f {
+  background: linear-gradient(45deg, #b43b3b, #9B2C2C);
+}
+
+.grade-badge-text {
+  font-size: 14px;
+  color: #555555;
+  font-weight: 500;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Animated stats grid */
+.stats-grid {
+  display: flex;
+  margin: 30px 0;
+  gap: 15px;
+  justify-content: space-between;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.6s;
+}
+
+.stat-card {
+  flex: 1;
+  background: white;
+  padding: 25px 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(15px);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card.total::before {
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+}
+
+.stat-card.grade-a::before {
+  background: linear-gradient(to right, #10B981, #059669);
+}
+
+.stat-card.grade-b::before {
+  background: linear-gradient(to right, #38B2AC, #2C9A94);
+}
+
+.stat-card.grade-c::before {
+  background: linear-gradient(to right, #f2cf4a, #E9B949);
+}
+
+.stat-card.grade-e::before {
+  background: linear-gradient(to right, #f56565, #E53E3E);
+}
+
+.stat-card.grade-f::before {
+  background: linear-gradient(to right, #b43b3b, #9B2C2C);
+}
+
+.stat-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.stat-card h3 {
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  margin: 10px 0;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.stat-value {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'League Spartan', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-value {
+  transform: scale(1.05);
+}
+
+.stat-card.total .stat-value {
+  color: #a4bc5a;
+}
+
+.stat-card.grade-a .stat-value {
+  color: #10B981;
+}
+
+.stat-card.grade-b .stat-value {
+  color: #38B2AC;
+}
+
+.stat-card.grade-c .stat-value {
+  color: #f2cf4a;
+}
+
+.stat-card.grade-e .stat-value {
+  color: #f56565;
+}
+
+.stat-card.grade-f .stat-value {
+  color: #b43b3b;
+}
+
+.stat-percentage {
+  font-size: 15px;
+  color: #888;
+  margin-top: 8px;
+  font-weight: 500;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Modern acceptance section */
+.acceptance-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.8s;
+}
+
+.acceptance-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+}
+
+.acceptance-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+  font-weight: 600;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.acceptance-stats {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 15px;
+  background: #f9f7e8;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.acceptance-stats div {
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+  font-family: 'Canva Sans', sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.acceptance-stats div:first-child::before {
+  content: '✓';
+  margin-right: 8px;
+  color: #10B981;
+  font-size: 18px;
+}
+
+.acceptance-stats div:last-child::before {
+  content: '✗';
+  margin-right: 8px;
+  color: #f56565;
+  font-size: 18px;
+}
+
+.acceptance-description {
+  margin: 15px 0;
+  font-size: 15px;
+  color: #666;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Enhanced progress bars */
+.progress-container {
+  margin: 20px 0 25px 0;
+}
+
+.progress-bar {
+  height: 35px;
+  background: #f0f0f0;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-grade {
+  height: 100%;
+  display: inline-block;
+  line-height: 35px;
+  padding-left: 15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  transition: width 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.progress-bar-grade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.progress-bar:hover .progress-bar-grade::after {
+  opacity: 1;
+}
+
+.progress-bar-grade.grade-a {
+  background: linear-gradient(45deg, #10B981, #059669);
+}
+
+.progress-bar-grade.grade-b {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.progress-bar-grade.grade-c {
+  background: linear-gradient(45deg, #f2cf4a, #E9B949);
+  color: #555;
+}
+
+.progress-bar-grade.grade-e {
+  background: linear-gradient(45deg, #f56565, #E53E3E);
+}
+
+.progress-bar-grade.grade-f {
+  background: linear-gradient(45deg, #b43b3b, #9B2C2C);
+}
+
+/* ENHANCED Fruit types section with colorful cards */
+.fruit-types-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 1s forwards 1s;
+}
+
+.fruit-types-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.fruit-types-title {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.fruit-types-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+  border-radius: 3px;
+}
+
+.fruit-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* ENHANCED: New colorful fruit card */
+.fruit-type-card {
+  background: white;
+  border-radius: 15px;
+  padding: 0;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideInUp 0.8s forwards calc(1.2s + var(--delay, 0s));
+  border: 1px solid #f0f0f0;
+}
+
+.fruit-type-card:nth-child(1) {
+  --delay: 0s;
+}
+
+.fruit-type-card:nth-child(2) {
+  --delay: 0.1s;
+}
+
+.fruit-type-card:nth-child(3) {
+  --delay: 0.2s;
+}
+
+.fruit-type-card:nth-child(4) {
+  --delay: 0.3s;
+}
+
+.fruit-type-card:nth-child(5) {
+  --delay: 0.4s;
+}
+
+.fruit-type-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ENHANCED: Fruit card header */
+.fruit-card-header {
+  padding: 25px 20px 15px;
+  background: linear-gradient(45deg, rgba(var(--fruit-color-rgb, 164, 188, 90), 0.15), rgba(var(--fruit-color-rgb, 164, 188, 90), 0.05));
+  position: relative;
+  border-radius: 15px 15px 0 0;
+}
+
+.fruit-type-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--fruit-color, #a4bc5a);
+  z-index: 1;
+}
+
+.fruit-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transform-origin: center;
+  transition: all 0.3s ease;
+}
+
+.fruit-type-card:hover .fruit-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.fruit-type-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.fruit-count {
+  display: inline-block;
+  background-color: var(--fruit-color, #a4bc5a);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-top: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* ENHANCED: Quality breakdown with colored indicators */
+.quality-breakdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.quality-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+.quality-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.quality-count {
+  font-size: 14px;
+  color: #666;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.fruit-type-card:hover .quality-indicator {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ENHANCED: Metrics with visual bars */
+.fruit-metrics {
+  padding: 20px;
+}
+
+.acceptance-metric,
+.excellence-metric {
+  margin-bottom: 15px;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: #555;
+  text-align: left;
+  margin-bottom: 5px;
+  font-family: 'Canva Sans', sans-serif;
+  font-weight: 500;
+}
+
+.metric-bar {
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.metric-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1s ease-out;
+}
+
+.acceptance-fill {
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+}
+
+.excellence-fill {
+  background: linear-gradient(to right, #10B981, #059669);
+}
+
+.metric-value {
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Loading and error states */
+.dashboard-loading, 
+.dashboard-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 40px auto;
+  min-height: 200px;
+  font-size: 18px;
+  color: #555555;
+  position: relative;
+  overflow: hidden;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.dashboard-loading::before,
+.dashboard-error::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.dashboard-loading::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #a4bc5a;
+  animation: spin 1.5s linear infinite;
+  margin-left: 15px;
+}
+
+.dashboard-error {
+  color: #b43b3b;
+}
+
+.dashboard-error::before {
+  background: linear-gradient(to right, #b43b3b, #f56565);
+}
+
+/* Parse fruit colors from HEX to RGB for CSS variables */
+.fruit-type-card {
+  --fruit-color-rgb: 164, 188, 90;
+}
+
+/* Add these new styles to your Dashboard.css file */
+
+.dashboard-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.download-pdf-button {
+  background: linear-gradient(45deg, #face11, #face11);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.3);
+}
+
+.download-pdf-button::before {
+  content: "📄";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.download-pdf-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(164, 188, 90, 0.4);
+}
+
+.download-pdf-button:active {
+  transform: translateY(-1px);
+}
+
+.download-pdf-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+#dashboard-content {
+  background-color: white;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  /* Better spacing between sections */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .download-pdf-button {
+    position: static;
+    margin-top: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .stats-grid {
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    min-width: 200px;
+    margin-bottom: 15px;
+  }
+  
+  .fruit-types-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .stats-grid {
+    flex-direction: column;
+  }
+  
+  .stat-card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .fruit-types-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .acceptance-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .grade-badges {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .grade-badge-item {
+    margin-bottom: 10px;
+  }
+}

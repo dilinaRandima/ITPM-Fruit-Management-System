@@ -1,0 +1,1276 @@
+/* Enhanced FruitGrading.css with improved styling */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.fruit-grading-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Upload form section with enhanced styling */
+.upload-section {
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  padding: 35px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideInUp 0.8s forwards;
+}
+
+.upload-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.upload-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #a4bc5a;
+  margin-bottom: 30px;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.upload-section h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #444;
+  font-size: 16px;
+  font-family: 'Canva Sans', sans-serif;
+  position: relative;
+  padding-left: 10px;
+}
+
+.form-group label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 18px;
+  background: #a4bc5a;
+  border-radius: 2px;
+}
+
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  font-family: 'Canva Sans', sans-serif;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.2);
+  background-color: #fff;
+}
+
+input[type="file"] {
+  padding: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="file"]::file-selector-button {
+  background: #a4bc5a;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  font-weight: 500;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #8aa548;
+}
+
+/* Image preview styling */
+.image-preview {
+  margin-top: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 2px solid #e0e0e0;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+button[type="submit"] {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(164, 188, 90, 0.3);
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: transform 0.8s ease;
+}
+
+button[type="submit"]:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(45deg, #8aa548, #a4bc5a);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(164, 188, 90, 0.4);
+}
+
+button[type="submit"]:active {
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: #f56565;
+  font-size: 14px;
+  margin-top: 7px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.error-message::before {
+  content: '⚠️';
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.upload-status {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f0fff4;
+  color: #2f855a;
+  animation: fadeIn 0.5s ease-out;
+  font-family: 'Canva Sans', sans-serif;
+  font-weight: 500;
+}
+
+.upload-status.error {
+  background-color: #fff5f5;
+  color: #c53030;
+  font-weight: 600;
+  border-left: 4px solid #e53e3e;
+  animation: errorPulse 2s infinite;
+}
+
+@keyframes errorPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(229, 62, 62, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+  }
+}
+
+/* Results section with modern styling */
+.results-section {
+  padding: 20px 0;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.3s;
+}
+
+.results-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #a4bc5a;
+  margin-bottom: 30px;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.results-section h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Stylish separator line */
+.separator-line {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+  margin: 25px 0;
+  width: 100%;
+}
+
+/* Enhanced quality grading scale */
+.grade-scale-legend {
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideInUp 0.8s forwards 0.5s;
+}
+
+.grade-scale-legend::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.grade-scale-title {
+  font-weight: 600;
+  color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.grade-scale-items {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.grade-scale-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.grade-scale-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.grade-scale-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; /* Make badges circular */
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.grade-scale-badge.grade-a {
+  background: linear-gradient(45deg, #10B981, #059669);
+}
+
+.grade-scale-badge.grade-b {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.grade-scale-badge.grade-c {
+  background: linear-gradient(45deg, #f2cf4a, #E9B949);
+  color: #555;
+}
+
+.grade-scale-badge.grade-e {
+  background: linear-gradient(45deg, #f56565, #E53E3E);
+}
+
+.grade-scale-badge.grade-f {
+  background: linear-gradient(45deg, #b43b3b, #9B2C2C);
+}
+
+.grade-scale-text {
+  font-size: 14px;
+  color: #555555;
+  font-weight: 500;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Modern filter controls with proper width and alignment */
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.7s;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-controls:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.search-input {
+  padding: 12px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  font-family: 'Canva Sans', sans-serif;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  flex: 1;
+}
+
+.search-input:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.1);
+  background-color: #fff;
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  color: #555;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-button:hover {
+  border-color: #a4bc5a;
+  background-color: #f0f7e6;
+}
+
+.filter-button.active {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border-color: #a4bc5a;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.2);
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9f7e8;
+  padding: 5px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.sort-select {
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  background-color: white;
+  color: #555;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 140px;
+}
+
+.sort-select:focus {
+  border-color: #a4bc5a;
+  outline: none;
+}
+
+.sort-direction-button {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.sort-direction-button:hover {
+  border-color: #a4bc5a;
+  background-color: #f0f7e6;
+}
+
+/* Enhanced fruit cards with animations */
+.fruits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.fruit-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.8s forwards calc(0.8s + var(--delay, 0s));
+  position: relative;
+}
+
+.fruit-card:nth-child(3n+1) {
+  --delay: 0s;
+}
+
+.fruit-card:nth-child(3n+2) {
+  --delay: 0.2s;
+}
+
+.fruit-card:nth-child(3n+3) {
+  --delay: 0.4s;
+}
+
+.fruit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fruit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.fruit-card:hover::before {
+  transform: scaleX(1);
+}
+
+.image-container {
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fruit-card:hover .image-container::after {
+  opacity: 1;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.fruit-card:hover .image-container img {
+  transform: scale(1.08);
+}
+
+.fruit-details {
+  padding: 25px;
+}
+
+.fruit-details h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.5rem;
+  color: #333;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.fruit-details h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #a4bc5a;
+  transition: width 0.3s ease;
+}
+
+.fruit-card:hover .fruit-details h3::after {
+  width: 100%;
+}
+
+.fruit-details p {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #555;
+  font-family: 'Canva Sans', sans-serif;
+  line-height: 1.6;
+}
+
+.fruit-details p strong {
+  font-weight: 600;
+  display: inline-block;
+  width: 120px;
+  color: #444;
+}
+
+/* Modern score display */
+.scores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.fruit-card:hover .scores {
+  background: #f0f7e6;
+}
+
+.score-item {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.fruit-card:hover .score-item {
+  transform: translateY(-3px);
+}
+
+.score-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #a4bc5a;
+  font-family: 'League Spartan', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.fruit-card:hover .score-value {
+  color: #8aa548;
+}
+
+.score-label {
+  font-size: 12px;
+  color: #777;
+  font-family: 'Canva Sans', sans-serif;
+  margin-top: 4px;
+}
+
+/* Update and Delete buttons */
+.fruit-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Update button styling */
+.update-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 18px !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  width: 48% !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Canva Sans', sans-serif !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  letter-spacing: 0.5px !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+.update-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: transform 0.8s ease;
+}
+
+.update-button:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+.update-button:hover {
+  background: linear-gradient(45deg, #8aa548, #a4bc5a);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.4);
+}
+
+.update-button:active {
+  transform: translateY(0);
+}
+
+/* Delete button styling */
+.delete-button {
+  background: linear-gradient(45deg, #f56565, #e53e3e);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-top: 0;
+  margin-right: 0;
+  width: 48%;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(229, 62, 62, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  display: block;
+  text-align: center;
+}
+
+.delete-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: transform 0.8s ease;
+}
+
+.delete-button:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+.delete-button:hover {
+  background: linear-gradient(45deg, #e53e3e, #c53030);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(229, 62, 62, 0.4);
+}
+
+.delete-button:active {
+  transform: translateY(0);
+}
+
+/* Enhanced grade and status indicators as circular badges */
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; /* Circular badge */
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 8px;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grade-badge.grade-a {
+  background: linear-gradient(45deg, #10B981, #059669);
+}
+
+.grade-badge.grade-b {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.grade-badge.grade-c {
+  background: linear-gradient(45deg, #f2cf4a, #E9B949);
+  color: #555;
+}
+
+.grade-badge.grade-e {
+  background: linear-gradient(45deg, #f56565, #E53E3E);
+}
+
+.grade-badge.grade-f {
+  background: linear-gradient(45deg, #b43b3b, #9B2C2C);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.status-badge.approved {
+  background: linear-gradient(45deg, #c6f6d5, #9ae6b4);
+  color: #22543d;
+}
+
+.status-badge.graded {
+  background: linear-gradient(45deg, #e9d8fd, #d6bcfa);
+  color: #553c9a;
+}
+
+.status-badge.rejected {
+  background: linear-gradient(45deg, #fed7d7, #feb2b2);
+  color: #822727;
+}
+
+.status-badge.pending {
+  background: linear-gradient(45deg, #e2e8f0, #cbd5e0);
+  color: #2d3748;
+}
+
+.status-badge.available {
+  background: linear-gradient(45deg, #c6f6d5, #9ae6b4);
+  color: #22543d;
+}
+
+/* Enhanced loading indicator */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: 'League Spartan', sans-serif;
+  color: #555;
+  font-size: 18px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.loading-indicator::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border: 3px solid #e2e8f0;
+  border-radius: 50%;
+  border-top-color: #a4bc5a;
+  animation: spin 1s linear infinite;
+}
+
+/* No results message */
+.no-results {
+  padding: 30px;
+  text-align: center;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 30px auto;
+  font-family: 'League Spartan', sans-serif;
+  color: #555;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.no-results::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+/* Modal backdrop */
+.update-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal container */
+.update-modal {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.4s ease;
+  position: relative;
+}
+
+/* Modal header */
+.update-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.update-modal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+  border-radius: 15px 15px 0 0;
+}
+
+.update-modal-header h3 {
+  margin: 0;
+  color: #444;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: #333;
+  transform: scale(1.1);
+}
+
+/* Modal form */
+.update-modal form {
+  padding: 20px 25px;
+}
+
+.update-modal .form-group {
+  margin-bottom: 20px;
+}
+
+.update-modal input[type="number"],
+.update-modal input[type="date"],
+.update-modal select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  font-family: 'Canva Sans', sans-serif;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.update-modal input[type="number"]:focus,
+.update-modal input[type="date"]:focus,
+.update-modal select:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.2);
+  background-color: #fff;
+}
+
+/* Modal footer */
+.update-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 15px 25px 25px;
+}
+
+.cancel-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  background: #f8f8f8;
+  color: #555;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.cancel-button:hover {
+  background: #f0f0f0;
+  border-color: #d0d0d0;
+}
+
+.save-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3);
+}
+
+.save-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.4);
+}
+
+.save-button:disabled,
+.cancel-button:disabled,
+.update-button:disabled,
+.delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .fruits-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .fruit-grading-container {
+    padding: 20px;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .filter-options {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .sort-controls {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .upload-section, 
+  .grade-scale-legend {
+    padding: 25px 20px;
+  }
+  
+  .upload-section h2,
+  .results-section h2 {
+    font-size: 2rem;
+  }
+  
+  .fruits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .grade-scale-items {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .grade-scale-item {
+    width: 100%;
+    justify-content: center;
+  }
+  /* Add these styles to your FruitGrading.css file */
+
+/* Custom file input styling */
+.custom-file-input {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.file-input-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.file-input-wrapper:focus-within,
+.file-input-wrapper:hover {
+  border-color: #a4bc5a;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.2);
+  background-color: #fff;
+}
+
+.file-input-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.file-input-button:hover {
+  background: linear-gradient(45deg, #8aa548, #a4bc5a);
+}
+
+.file-name {
+  padding: 0 15px;
+  color: #444;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+/* Enhanced image preview */
+.image-preview {
+  margin-top: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 200px;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.image-preview:hover {
+  border-color: #a4bc5a;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+}

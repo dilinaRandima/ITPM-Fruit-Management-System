@@ -1,0 +1,1434 @@
+/* Enhanced FruitMarket.css with fixed cart positioning and grade circles */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.fruit-market-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+  position: relative;
+}
+
+/* Market title with animation */
+.market-title {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideInDown 0.8s forwards 0.2s;
+}
+
+.market-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Market Intro Panel */
+.market-intro-panel {
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards 0.4s;
+}
+
+.market-intro-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.intro-icon {
+  font-size: 2rem;
+  margin-right: 20px;
+  animation: bounce 2s infinite;
+}
+
+.intro-text {
+  flex: 1;
+}
+
+.intro-text p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Cart Toggle Button */
+.cart-toggle {
+  background: #a4bc5a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+
+.cart-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  background: #8aa548;
+}
+
+.cart-toggle.has-items {
+  animation: pulse 2s infinite;
+}
+
+.cart-icon {
+  font-size: 1.4rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f2cf4a;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* Filter Controls - Similar to FruitGrading.css */
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 1s forwards 0.7s;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-controls:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.search-input {
+  padding: 12px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  font-family: 'Canva Sans', sans-serif;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  flex: 1;
+}
+
+.search-input:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.1);
+  background-color: #fff;
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  color: #555;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-button:hover {
+  border-color: #a4bc5a;
+  background-color: #f0f7e6;
+}
+
+.filter-button.active {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border-color: #a4bc5a;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.2);
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9f7e8;
+  padding: 5px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.sort-select {
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  background-color: white;
+  color: #555;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 140px;
+}
+
+.sort-select:focus {
+  border-color: #a4bc5a;
+  outline: none;
+}
+
+.sort-direction-button {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.sort-direction-button:hover {
+  border-color: #a4bc5a;
+  background-color: #f0f7e6;
+}
+
+/* Success and Error Messages */
+.success-message,
+.error-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-family: 'Canva Sans', sans-serif;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.success-message {
+  background-color: #f0fff4;
+  color: #38a169;
+  border-left: 5px solid #38a169;
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-left: 5px solid #e53e3e;
+}
+
+/* Shopping Cart with fixed positioning */
+.shopping-cart {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 380px;
+  height: 65vh;
+  background-color: white;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.shopping-cart.open {
+  right: 0;
+}
+
+/* Add an overlay when cart is open */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cart-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #a4bc5a;
+  color: white;
+}
+
+.cart-header h3 {
+  margin: 0;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.3rem;
+}
+
+.close-cart {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 30px;
+  text-align: center;
+}
+
+.empty-cart-icon {
+  font-size: 4rem;
+  color: #e2e8f0;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.empty-cart p {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 5px 0;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.empty-cart-subtext {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Cart Item Styling - Updated to match screenshot */
+.cart-item {
+  background-color: #f9f9f9;
+  border-radius: 0;
+  margin-bottom: 15px;
+  padding: 15px;
+  position: relative;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.cart-item-image {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 0;
+  float: left;
+  margin-right: 15px;
+}
+
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-details {
+  margin-left: 85px;
+}
+
+.cart-item-details h4 {
+  margin: 0 0 5px;
+  font-family: 'Canva Sans', sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.cart-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cart-item-price {
+  font-weight: 600;
+  color: #a4bc5a;
+  font-size: 1rem;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.cart-item-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* Quantity Controls - Updated to match screenshot */
+/* Quantity Control Styling */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  background: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.quantity-control button {
+  width: 40px;
+  height: 36px;
+  background-color: #f9f9f9;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quantity-control button:hover {
+  background-color: #f0f0f0;
+}
+
+.quantity-control button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-control input {
+  flex: 1;
+  height: 36px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  background: white;
+  -moz-appearance: textfield;
+}
+
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove Button - Updated to match screenshot */
+/* Enhanced Remove button styling */
+/* Remove Button Styling */
+.remove-item {
+  background-color: transparent;
+  color: #e53e3e;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.remove-item:hover {
+  text-decoration: underline;
+}
+
+.remove-item:hover {
+  text-decoration: underline;
+}
+
+.cart-item-subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0e0e0;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Cart Summary and Buttons - Updated to match screenshot */
+.cart-summary {
+  padding: 20px;
+  background-color: #f9f7e8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-button {
+  background-color: #a4bc5a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #8aa548;
+}
+
+.clear-cart-button {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.clear-cart-button:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+/* Grade Badge Styling */
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; /* Make it circular */
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grade-badge.grade-a {
+  background: linear-gradient(45deg, #10B981, #059669);
+}
+
+.grade-badge.grade-b {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.grade-badge.grade-c {
+  background: linear-gradient(45deg, #f2cf4a, #E9B949);
+  color: #555;
+}
+
+/* Main Content - Fruit Listings */
+.fruits-market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* Fruit Market Card */
+.fruit-market-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.8s forwards calc(0.8s + var(--delay, 0s));
+}
+
+.fruit-market-card:nth-child(3n+1) {
+  --delay: 0s;
+}
+
+.fruit-market-card:nth-child(3n+2) {
+  --delay: 0.2s;
+}
+
+.fruit-market-card:nth-child(3n+3) {
+  --delay: 0.4s;
+}
+
+.fruit-market-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fruit-market-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.fruit-market-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Card Header */
+.fruit-card-header {
+  padding: 15px;
+  background-color: #f9f7e8;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fruit-card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #333;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 600;
+}
+
+/* Image Container */
+.image-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.fruit-market-card:hover .image-container img {
+  transform: scale(1.08);
+}
+
+.price-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(164, 188, 90, 0.9);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* Card Details */
+.fruit-card-details {
+  padding: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.detail-label {
+  color: #666;
+}
+
+/* Add to Cart Button */
+.add-to-cart-button {
+  width: 100%;
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Better text visibility */
+  letter-spacing: 0.5px; /* Better text visibility */
+}
+
+.add-to-cart-button:hover {
+  background: linear-gradient(45deg, #8aa548, #7a9238);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.add-to-cart-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Add to Cart Modal */
+.add-to-cart-modal {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.modal-header {
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-fruit-details {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.modal-fruit-image {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.modal-fruit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-fruit-info {
+  flex: 1;
+}
+
+.modal-fruit-info h4 {
+  margin: 0 0 10px;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.modal-fruit-grade {
+  margin: 0 0 10px;
+}
+
+.modal-fruit-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #a4bc5a;
+  margin: 0 0 10px;
+}
+
+.modal-fruit-available {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.modal-quantity {
+  margin-bottom: 20px;
+}
+
+.modal-quantity label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 20px 0;
+  padding-top: 15px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 15px;
+  padding: 0 20px 20px;
+}
+
+.modal-footer button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  border: none;
+}
+
+.cancel-button {
+  background-color: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.cancel-button:hover {
+  background-color: #edf2f7;
+}
+
+.add-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Better text visibility */
+}
+
+.add-button:hover {
+  background: linear-gradient(45deg, #8aa548, #7a9238);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Loading State */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: 'League Spartan', sans-serif;
+  color: #555;
+  font-size: 18px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+}
+
+.loading-indicator::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border: 3px solid #e2e8f0;
+  border-radius: 50%;
+  border-top-color: #a4bc5a;
+  animation: spin 1s linear infinite;
+}
+
+/* No Fruits Message */
+.no-fruits-message {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(249, 247, 232, 0.85));
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  margin: 30px auto;
+  color: #555;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.no-fruits-message p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(164, 188, 90, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(164, 188, 90, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(164, 188, 90, 0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .fruits-market-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .fruit-market-container {
+    padding: 20px;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .filter-options {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .sort-controls {
+    margin-top: 10px;
+  }
+  
+  .shopping-cart {
+    width: 100%;
+    right: -100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .market-title {
+    font-size: 2rem;
+  }
+  
+  .fruits-market-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .filter-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .modal-fruit-details {
+    flex-direction: column;
+  }
+  
+  .modal-fruit-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  /* Add these styles to FruitMarket.css */
+
+/* Stock status indicators */
+.stock-status {
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+}
+
+.stock-status.in-stock {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.stock-status.low-stock {
+  background-color: #fffaf0;
+  color: #dd6b20;
+}
+
+.stock-status.out-of-stock {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+/* Expiry date styling */
+.modal-fruit-expiry {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Add to FruitCollection.css */
+
+/* Expiry date input styling */
+input[type="date"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: #444;
+}
+
+input[type="date"]:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
+}
+
+/* Make expired products stand out */
+.expired {
+  position: relative;
+}
+
+.expired::after {
+  content: 'EXPIRED';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(229, 62, 62, 0.9);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
+}
+/* Add these styles to your FruitGrading.css file */
+
+/* Update button styling to match delete button but with different color */
+.update-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-top: 0;
+  margin-right: 10px;
+  width: 45%;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.update-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: transform 0.8s ease;
+}
+
+.update-button:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+.update-button:hover {
+  background: linear-gradient(45deg, #8aa548, #a4bc5a);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.4);
+}
+
+.update-button:active {
+  transform: translateY(0);
+}
+
+/* Resize delete button to match update button width */
+.delete-button {
+  width: 45%;
+  margin-top: 0;
+}
+
+/* Container for buttons to display side by side */
+.fruit-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Modal backdrop */
+.update-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal container */
+.update-modal {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.4s ease;
+  position: relative;
+}
+
+/* Modal header */
+.update-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.update-modal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #a4bc5a, #f2cf4a);
+  border-radius: 15px 15px 0 0;
+}
+
+.update-modal-header h3 {
+  margin: 0;
+  color: #444;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: #333;
+  transform: scale(1.1);
+}
+
+/* Modal form */
+.update-modal form {
+  padding: 20px 25px;
+}
+
+.update-modal .form-group {
+  margin-bottom: 20px;
+}
+
+.update-modal input[type="number"],
+.update-modal input[type="date"],
+.update-modal select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  font-family: 'Canva Sans', sans-serif;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.update-modal input[type="number"]:focus,
+.update-modal input[type="date"]:focus,
+.update-modal select:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(164, 188, 90, 0.2);
+  background-color: #fff;
+}
+
+/* Modal footer */
+.update-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 15px 25px 25px;
+}
+
+.cancel-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  background: #f8f8f8;
+  color: #555;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.cancel-button:hover {
+  background: #f0f0f0;
+  border-color: #d0d0d0;
+}
+
+.save-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.3);
+}
+
+.save-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.4);
+}
+
+.save-button:disabled,
+.cancel-button:disabled,
+.update-button:disabled,
+.delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Ensure modal animations work properly */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  
+}

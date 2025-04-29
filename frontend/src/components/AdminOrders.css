@@ -1,0 +1,723 @@
+/* src/components/AdminOrders.css - Styled to match InventoryManagement.css */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.admin-orders-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Admin title with animation */
+.admin-title {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideInDown 0.8s forwards 0.2s;
+}
+
+.admin-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Info Panel - Matched with InventoryManagement */
+.admin-info-panel {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards 0.4s;
+}
+
+.info-icon {
+  font-size: 1.6rem;
+  margin-right: 20px;
+  color: #555;
+  background-color: #f0f0f0;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-text p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Order Stats - Match the inventory stats */
+.order-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeInUp 0.8s forwards 0.5s;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.stat-card.total-orders::before {
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+}
+
+.stat-card.processing::before {
+  background: linear-gradient(to right, #4299e1, #3182ce);
+}
+
+.stat-card.completed::before {
+  background: linear-gradient(to right, #38a169, #2f855a);
+}
+
+.stat-card.canceled::before {
+  background: linear-gradient(to right, #f56565, #c53030);
+}
+
+.stat-card h3 {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.stat-card.total-orders .stat-value {
+  color: #a4bc5a;
+}
+
+.stat-card.processing .stat-value {
+  color: #3182ce;
+}
+
+.stat-card.completed .stat-value {
+  color: #38a169;
+}
+
+.stat-card.canceled .stat-value {
+  color: #e53e3e;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Success and Error Messages - Match InventoryManagement style */
+.success-message,
+.error-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-family: 'Canva Sans', sans-serif;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.success-message {
+  background-color: #f0fff4;
+  color: #38a169;
+  border-left: 3px solid #38a169;
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-left: 3px solid #e53e3e;
+}
+
+/* Filter Controls - Match InventoryManagement style */
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards 0.7s;
+}
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  font-family: 'Canva Sans', sans-serif;
+  transition: all 0.3s ease;
+  background-color: white;
+  flex: 1;
+}
+
+.search-input:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(164, 188, 90, 0.1);
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  background: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  font-weight: normal;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.filter-button.active {
+  background-color: #a4bc5a;
+  color: white;
+  border-color: #8aa548;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-select {
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  background-color: white;
+  color: #555;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #a4bc5a;
+}
+
+.sort-direction-button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sort-direction-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Table Container - Match InventoryManagement style */
+.admin-orders-table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  border: 1px solid #f0f0f0;
+  animation: fadeInUp 0.8s forwards 0.6s;
+  opacity: 0;
+}
+
+/* Orders Table */
+.admin-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-orders-table th {
+  padding: 15px;
+  text-align: left;
+  background-color: #f8f8f8;
+  border-bottom: 2px solid #eee;
+  font-weight: 600;
+  color: #444;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.admin-orders-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
+  font-family: 'Canva Sans', sans-serif;
+}
+
+.order-row {
+  transition: background-color 0.2s ease;
+}
+
+.order-row:hover {
+  background-color: #f9f9f9;
+}
+
+.canceled-row {
+  background-color: rgba(229, 62, 62, 0.05);
+}
+
+.canceled-row:hover {
+  background-color: rgba(229, 62, 62, 0.1);
+}
+
+.processing-row {
+  background-color: rgba(66, 153, 225, 0.05);
+}
+
+.processing-row:hover {
+  background-color: rgba(66, 153, 225, 0.1);
+}
+
+.completed-row {
+  background-color: rgba(56, 161, 105, 0.05);
+}
+
+.completed-row:hover {
+  background-color: rgba(56, 161, 105, 0.1);
+}
+
+/* Customer Info Styling */
+.customer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.customer-email {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Status badge styling - Pill design */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 50px; /* Increased border-radius for pill shape */
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  min-width: 100px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+/* Status colors with matching light backgrounds and text colors */
+.status-pending {
+  background-color: #ebf8ff; /* Light blue background */
+  color: #3182ce; /* Blue text */
+}
+
+.status-processing {
+  background-color: #e6fffa; /* Light teal background */
+  color: #38b2ac; /* Teal text */
+}
+
+.status-shipped {
+  background-color: #edf2f7; /* Light gray background */
+  color: #4a5568; /* Darker gray text */
+}
+
+.status-delivered {
+  background-color: #f0fff4; /* Light green background */
+  color: #38a169; /* Green text */
+}
+
+.status-completed {
+  background-color: #f0fff4; /* Light green background */
+  color: #38a169; /* Green text */
+}
+
+.status-canceled {
+  background-color: #fff5f5; /* Light red background */
+  color: #e53e3e; /* Red text */
+}
+
+/* Shipping status dropdown - styled to look like pills when not active */
+.shipping-status-select {
+  appearance: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background-color: white;
+  color: #444;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 150px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 9L0 3h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.shipping-status-select:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
+}
+
+.shipping-status-select:hover {
+  background-color: #f9fafb;
+}
+
+/* Status options styling */
+.shipping-status-select option {
+  font-weight: 500;
+}
+
+/* Disabled state */
+.shipping-status-select.disabled {
+  background-color: #f7fafc;
+  color: #a0aec0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Processing option */
+.shipping-status-select option[value="processing"] {
+  color: #38b2ac;
+}
+
+/* Shipped option */
+.shipping-status-select option[value="shipped"] {
+  color: #4a5568;
+}
+
+/* Delivered option */
+.shipping-status-select option[value="delivered"] {
+  color: #38a169;
+}
+
+/* Make the Completed/Processing badges in the status column match */
+.status-select-container select.shipping-status-select option[value="processing"] {
+  color: #38b2ac;
+}
+
+.status-select-container select.shipping-status-select option[value="completed"] {
+  color: #38a169;
+}
+
+/* Status select container */
+.status-select-container {
+  position: relative;
+  width: 100%;
+  max-width: 150px;
+}
+
+/* Action buttons cell */
+.action-buttons-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+/* Ensure table cells and their contents are aligned properly */
+.admin-orders-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
+  font-family: 'Canva Sans', sans-serif;
+  height: 70px; /* Fixed height for all cells */
+}
+
+/* Make all selects and status badges the same height */
+.shipping-status-select,
+.status-badge {
+  height: 38px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center buttons in their cell */
+.admin-orders-table td:last-child {
+  text-align: center;
+}
+
+/* Action buttons - Match pill shape of status badges */
+.view-details-button, 
+.delete-order-button {
+  padding: 8px 16px;
+  border-radius: 50px; /* Pill shape to match status badges */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  font-family: 'Canva Sans', sans-serif;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.view-details-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+}
+
+.view-details-button:hover {
+  background: linear-gradient(45deg, #8aa548, #768e3d);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(164, 188, 90, 0.2);
+}
+
+.delete-order-button {
+  background: linear-gradient(45deg, #E53E3E, #C53030);
+  color: white;
+}
+
+.delete-order-button:hover {
+  background: linear-gradient(45deg, #C53030, #9B2C2C);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(229, 62, 62, 0.2);
+}
+
+/* No orders message */
+.no-orders-message {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 30px auto;
+  color: #555;
+  border: 1px solid #f0f0f0;
+  animation: fadeIn 0.8s forwards 0.5s;
+  opacity: 0;
+}
+
+.no-orders-icon {
+  font-size: 80px;
+  color: #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.no-orders-message p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+/* Unauthorized container */
+.unauthorized-container {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 40px auto;
+  max-width: 600px;
+  border: 1px solid #f0f0f0;
+}
+
+.unauthorized-container h2 {
+  color: #e53e3e;
+  font-family: 'League Spartan', sans-serif;
+  margin-bottom: 20px;
+}
+
+.unauthorized-container p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Total amount styling */
+.order-total {
+  font-weight: 600;
+  color: #a4bc5a;
+}
+
+/* Loading indicator - Match InventoryManagement */
+.loading-indicator {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 30px auto;
+  color: #555;
+  border: 1px solid #f0f0f0;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .admin-orders-container {
+    padding: 20px;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .filter-options {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .order-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-title {
+    font-size: 2rem;
+  }
+  
+  .admin-orders-table th:nth-child(3),
+  .admin-orders-table td:nth-child(3),
+  .admin-orders-table th:nth-child(4),
+  .admin-orders-table td:nth-child(4) {
+    display: none;
+  }
+  
+  .view-details-button, .delete-order-button {
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 60px;
+  }
+  
+  .action-buttons-cell {
+    flex-direction: column;
+  }
+}

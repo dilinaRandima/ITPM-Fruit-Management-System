@@ -1,0 +1,607 @@
+/* Enhanced FruitCollection.css with improved styling */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/canva-sans');
+
+.fruit-collection-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+  font-family: 'Canva Sans', 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Collection title */
+.collection-title {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #a4bc5a;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.collection-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, #a4bc5a, #8aa548);
+  border-radius: 3px;
+}
+
+/* Info Panel */
+.collection-info-panel {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.info-icon {
+  font-size: 1.6rem;
+  margin-right: 20px;
+  color: #555;
+  background-color: #f0f0f0;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-text p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Manual Add Toggle Button with better styling */
+.manual-add-toggle {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards 0.4s;
+}
+
+.toggle-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(164, 188, 90, 0.2);
+}
+
+.toggle-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(164, 188, 90, 0.3);
+}
+
+.toggle-button:active {
+  transform: translateY(-1px);
+}
+
+.back-button {
+  background: linear-gradient(45deg, #64748b, #475569);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
+}
+
+.back-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(100, 116, 139, 0.3);
+}
+
+.back-button:active {
+  transform: translateY(-1px);
+}
+
+/* Filter Controls - Match screenshot */
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+  animation: fadeIn 0.8s forwards 0.5s;
+}
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  font-family: 'Canva Sans', sans-serif;
+  transition: all 0.3s ease;
+  background-color: white;
+  flex: 1;
+}
+
+.search-input:focus {
+  border-color: #a4bc5a;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(164, 188, 90, 0.1);
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  background: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Canva Sans', sans-serif;
+  font-weight: normal;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.filter-button.active {
+  background-color: #a4bc5a;
+  color: white;
+  border-color: #8aa548;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-select {
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  background-color: white;
+  color: #555;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #a4bc5a;
+}
+
+.sort-direction-button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sort-direction-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Fruit Cards - Match screenshot */
+.fruits-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.fruit-collection-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  animation: fadeInUp 0.6s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fruit-collection-card:nth-child(1) {
+  animation-delay: 0.6s;
+}
+
+.fruit-collection-card:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.fruit-collection-card:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.fruit-collection-card:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+.fruit-collection-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Card Header */
+.fruit-card-header {
+  padding: 15px;
+  background-color: white;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fruit-card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #333;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 600;
+}
+
+/* Enhanced Grade Badge as Circle */
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* Make it circular */
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Canva Sans', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grade-badge.grade-a {
+  background: linear-gradient(45deg, #38B2AC, #2C9A94);
+}
+
+.grade-badge.grade-b {
+  background: linear-gradient(45deg, #3182CE, #2B6CB0);
+}
+
+.grade-badge.grade-c {
+  background: linear-gradient(45deg, #ECC94B, #D69E2E);
+  color: #2D3748;
+}
+
+/* Image Container */
+.image-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.availability-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(164, 188, 90, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Card Details */
+.fruit-card-details {
+  padding: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.detail-label {
+  color: #666;
+}
+
+.detail-value.price {
+  color: #a4bc5a;
+  font-weight: 600;
+}
+
+.detail-value.quantity {
+  color: #38B2AC;
+  font-weight: 600;
+}
+
+.detail-value.status {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.detail-value.status.available {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.detail-value.status.approved,
+.detail-value.status.graded {
+  background-color: #ebf8ff;
+  color: #3182ce;
+}
+
+/* Fixed "Not available" status style */
+.detail-value.status.Not.available,
+.detail-value.status.rejected {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+/* Enhanced Card Actions - Consistent button styling */
+.fruit-card-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 15px 15px;
+}
+
+.edit-button, 
+.delete-button {
+  flex: 1;
+  height: 45px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  min-width: 100px;
+  margin: 0;
+  padding: 0 15px;
+  line-height: 1.5;
+  letter-spacing: 0.5px; /* Better text visibility */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Better text visibility */
+}
+
+.edit-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+}
+
+.edit-button:hover {
+  background: linear-gradient(45deg, #8aa548, #7a9238);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(164, 188, 90, 0.3);
+}
+
+.delete-button {
+  background: linear-gradient(45deg, #E53E3E, #C53030);
+  color: white;
+}
+
+.delete-button:hover {
+  background: linear-gradient(45deg, #C53030, #9B2C2C);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(229, 62, 62, 0.3);
+}
+
+/* Edit Mode */
+.fruit-card-edit-mode {
+  padding-bottom: 15px;
+}
+
+.edit-form {
+  padding: 15px;
+}
+
+.edit-form .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #444;
+  font-size: 14px;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.edit-form input:focus {
+  border-color: #a4bc5a;
+  outline: none;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-button {
+  flex: 1;
+  background-color: #a4bc5a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px; /* Better text visibility */
+}
+
+.cancel-button {
+  flex: 1;
+  background-color: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.save-button:hover {
+  background-color: #8aa548;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(164, 188, 90, 0.2);
+}
+
+.cancel-button:hover {
+  background-color: #edf2f7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Success/Error Messages */
+.success-message,
+.error-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #f0fff4;
+  color: #38a169;
+  border-left: 3px solid #38a169;
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-left: 3px solid #e53e3e;
+}
+
+/* Loading/No Results States */
+.loading-indicator,
+.no-fruits-message {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 30px auto;
+  color: #555;
+  border: 1px solid #f0f0f0;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .fruit-collection-container {
+    padding: 20px;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .filter-options {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fruits-collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
