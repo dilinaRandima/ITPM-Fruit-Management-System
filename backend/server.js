@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('MongoDB connected'))
+.then(() => console.log('MongoDB connected m'))
 .catch(err => console.error('MongoDB connection error:', err));
 
 // Define schemas (AFTER mongoose connection)
