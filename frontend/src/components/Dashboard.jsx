@@ -151,6 +151,35 @@ const Dashboard = () => {
       default: return '#ccc';
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/fruits/");
+        const data = response.data;
+  
+        setFruitData(data);
+  
+        const total = data.length;
+        const accepted = data.filter(fruit => ['A', 'B', 'C'].includes(fruit.grade)).length;
+        const rejected = data.filter(fruit => ['E', 'F'].includes(fruit.grade)).length;
+  
+        setTotalFruits(total);
+        setAcceptedFruits(accepted);
+        setRejectedFruits(rejected);
+  
+        const grades = {};
+        data.forEach(fruit => {
+          grades[fruit.grade] = (grades[fruit.grade] || 0) + 1;
+        });
+        setFruitGrades(grades);
+      } catch (error) {
+        console.error("Error fetching fruit data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   // New PDF download function using dom-to-image and jsPDF
   const handleDownloadPDF = async () => {
@@ -235,7 +264,7 @@ const Dashboard = () => {
       pdf.save('report.pdf');
       
     } catch (error) {
-      console.error('Error :', error);
+      console.error('Error generating PDF:', error);
       alert('Error generating PDF. Please try again.');
     } finally {
       setIsPdfGenerating(false);
