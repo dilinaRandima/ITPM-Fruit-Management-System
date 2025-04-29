@@ -607,7 +607,37 @@ const FruitGrading = () => {
     )}
   </div>
 )}
+
+<div className="form-buttons">
+  <button 
+    type="button" 
+    onClick={() => {
+      setFormData({
+        name: '',
+        variety: '',
+        collectorId: '',
+        image: null
+      });
+      setPreviewUrl(null);
+      setFormErrors({
+        name: '',
+        variety: '',
+        collectorId: '',
+        image: ''
+      });
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput) fileInput.value = '';
+    }}
+    className="reset-button"
+  >
+    Reset Form
+  </button>
+  <button type="submit" disabled={isLoading}>
+    {isLoading ? 'Processing...' : 'Upload and Grade'}
+  </button>
+</div>
           </div>
+
           
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Processing...' : 'Upload and Grade'}
