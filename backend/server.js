@@ -317,6 +317,15 @@ app.get('/api/admin/stats', authenticate, authorize(['admin']), async (req, res)
   }
 });
 
+app.get('/api/admin/stats/ids', authenticate, authorize(['admin']), async (req, res) => {
+    try {
+      res.json({ message: 'selected admin stats accessed successfully' });
+    } catch (error) {
+      console.error('stats error:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+
 // ===== FRUIT ROUTES =====
 
 // API endpoint to upload and grade fruit - Updated with non-fruit validation
