@@ -179,6 +179,25 @@ const Dashboard = () => {
   
     fetchData();
   }, []);
+
+  const calculateFruitTypes = () => {
+    const types = {};
+  
+    fruitData.forEach(fruit => {
+      const type = fruit.fruitType;
+      if (!types[type]) {
+        types[type] = { total: 0, accepted: 0, rejected: 0, excellent: 0 };
+      }
+      types[type].total++;
+  
+      if (['A', 'B', 'C'].includes(fruit.grade)) types[type].accepted++;
+      if (['E', 'F'].includes(fruit.grade)) types[type].rejected++;
+      if (fruit.grade === 'A') types[type].excellent++;
+    });
+  
+    setFruitTypes(types);
+  };
+  
   
 
   // New PDF download function using dom-to-image and jsPDF
