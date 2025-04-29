@@ -236,6 +236,8 @@ const FruitGrading = () => {
     
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
+      const [currentPage, setCurrentPage] = useState(1);
+const [fruitsPerPage] = useState(8);
       result = result.filter(fruit => 
         fruit.name.toLowerCase().includes(term) || 
         fruit.collectorId.toLowerCase().includes(term)
@@ -788,6 +790,27 @@ const FruitGrading = () => {
                       <div className="score-label">Quality</div>
                     </div>
                   </div>
+                  {filteredFruits.length > 0 && (
+  <div className="pagination">
+    <button 
+      onClick={() => paginate(currentPage - 1)} 
+      disabled={currentPage === 1}
+      className="pagination-button"
+    >
+      Previous
+    </button>
+    <span className="pagination-info">
+      Page {currentPage} of {totalPages}
+    </span>
+    <button 
+      onClick={() => paginate(currentPage + 1)} 
+      disabled={currentPage === totalPages}
+      className="pagination-button"
+    >
+      Next
+    </button>
+  </div>
+)}
                   
                   <div className="fruit-card-actions">
                     <UpdateButton 
