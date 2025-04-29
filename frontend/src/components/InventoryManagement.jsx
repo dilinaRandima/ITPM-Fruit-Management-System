@@ -303,8 +303,8 @@ const InventoryManagement = () => {
         fileInputRef.current.value = '';
       }
     } catch (err) {
-      console.error('Error adding fruit:', err);
-      setError(`Failed to add fruit: ${err.response?.data?.error || err.message}`);
+      console.error('Error :', err);
+      setError(`Failed to add : ${err.response?.data?.error || err.message}`);
       setIsLoading(false);
     }
   };
