@@ -232,7 +232,7 @@ const Dashboard = () => {
       addHeadersAndFooters();
       
       // Save the PDF
-      pdf.save('fruit-dashboard-report.pdf');
+      pdf.save('report.pdf');
       
     } catch (error) {
       console.error('Error generating PDF:', error);
