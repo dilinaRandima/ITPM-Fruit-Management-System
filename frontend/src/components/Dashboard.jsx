@@ -197,6 +197,31 @@ const Dashboard = () => {
   
     setFruitTypes(types);
   };
+  const getFruitIon = (fruitType) => {
+    const icons = {
+      Banana: "🍌",
+      Apple: "🍎",
+      Orange: "🍊",
+      Pineapple: "🍍",
+      Mango: "🥭",
+      Default: "🍇",
+    };
+  
+    const colors = {
+      Banana: "bg-yellow-200",
+      Apple: "bg-red-200",
+      Orange: "bg-orange-200",
+      Pineapple: "bg-yellow-300",
+      Mango: "bg-orange-300",
+      Default: "bg-purple-200",
+    };
+  
+    return {
+      icon: icons[fruitType] || icons.Default,
+      bgColor: colors[fruitType] || colors.Default,
+    };
+  };
+  
   
   
 
