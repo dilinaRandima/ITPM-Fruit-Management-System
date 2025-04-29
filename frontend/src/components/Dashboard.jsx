@@ -235,7 +235,7 @@ const Dashboard = () => {
       pdf.save('report.pdf');
       
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      console.error('Error :', error);
       alert('Error generating PDF. Please try again.');
     } finally {
       setIsPdfGenerating(false);
