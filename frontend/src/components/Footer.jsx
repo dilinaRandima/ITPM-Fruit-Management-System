@@ -10,7 +10,7 @@ const Footer = () => {
           <h3>Contact Us</h3>
           <p>Location: Malabe Srilanka</p>
           <p>Call us: (+94) 716666690</p>
-          <p>Email: info@freshroute.com</p>
+          <p>Email: freshroute@gmail.com</p>
           <div className="social-icons">
             <a href="https://www.facebook.com" className="social-icon facebook hover-float"></a>
             <a href="https://www.instagram.com" className="social-icon instagram hover-float"></a>
@@ -31,7 +31,7 @@ const Footer = () => {
         
         <div className="footer-column">
           <h3>Newsletter Sign Up</h3>
-          <p>Receive our latest updates about our system and features.</p>
+          <p>Receive our latest updates.</p>
           <div className="newsletter-form">
             <input type="email" placeholder="Enter your email address" />
             <button type="submit">Submit</button>
