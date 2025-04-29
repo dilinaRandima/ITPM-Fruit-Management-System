@@ -107,6 +107,25 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const handleDownloadpDF = () => {
+    const node = document.getElementById('dashboard-content');
+  
+    domtoimage.toPng(node)
+      .then((dataUrl) => {
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgProps = pdf.getImageProperties(dataUrl);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+        pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("dashboard.pdf");
+      })
+      .catch((error) => {
+        console.error("Error generating PDF:", error);
+      });
+  };
+  
+
   // Function to get fruit icon based on fruit name
   const getFruitIcon = (fruitName) => {
     const name = fruitName.toLowerCase();
