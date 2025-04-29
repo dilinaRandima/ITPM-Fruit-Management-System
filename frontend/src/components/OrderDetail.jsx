@@ -297,17 +297,15 @@ const OrderDetail = () => {
                     <div className="shipping-steps">
                       <div className={`shipping-step ${order.shipping.status === 'processing' || order.shipping.status === 'shipped' || order.shipping.status === 'delivered' ? 'active' : ''}`}>
                         <div className="step-icon">1</div>
-                        <div className="step-label">Processing</div>
+                        <div className="step-name">Processing</div>
                       </div>
-                      <div className="step-connector"></div>
                       <div className={`shipping-step ${order.shipping.status === 'shipped' || order.shipping.status === 'delivered' ? 'active' : ''}`}>
                         <div className="step-icon">2</div>
-                        <div className="step-label">Shipped</div>
+                        <div className="step-name">Shipped</div>
                       </div>
-                      <div className="step-connector"></div>
                       <div className={`shipping-step ${order.shipping.status === 'delivered' ? 'active' : ''}`}>
                         <div className="step-icon">3</div>
-                        <div className="step-label">Delivered</div>
+                        <div className="step-name">Delivered</div>
                       </div>
                     </div>
                   </div>
@@ -319,38 +317,27 @@ const OrderDetail = () => {
                 <div className="info-box">
                   <div className="info-item">
                     <span className="info-label">Payment Method:</span>
-                    <span className="info-value">
-                      {order.payment.method === 'card' 
-                        ? `Credit Card (ending in ${order.payment.cardLast4})` 
-                        : 'Cash on Delivery'}
-                    </span>
+                    <span className="info-value">{order.payment.method}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">Payment Status:</span>
-                    <span className={`info-value payment-status ${order.payment.status}`}>
-                      {order.payment.status.charAt(0).toUpperCase() + order.payment.status.slice(1)}
-                    </span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Email:</span>
-                    <span className="info-value">{order.userDetails.email}</span>
+                    <span className="info-value">{order.payment.status}</span>
                   </div>
                 </div>
+                
+                {order.payment.status === 'completed' && (
+                  <div className="payment-success">
+                    Payment completed successfully.
+                  </div>
+                )}
               </div>
             </div>
           </div>
           
           <div className="order-actions-bottom">
             <button 
-              className="back-to-orders-button"
-              onClick={handleBackToOrders}
-            >
-              Back to {user.role === 'admin' ? 'Manage Orders' : 'My Orders'}
-            </button>
-            
-            <button 
-              className="print-order-button"
               onClick={handlePrint}
+              className="print-order-button"
             >
               Print Order
             </button>
