@@ -4,6 +4,9 @@ import axios from 'axios';
 import './Dashboard.css';
 import domtoimage from 'dom-to-image';
 import { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
+import domtoimage from 'dom-to-image';
+
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
