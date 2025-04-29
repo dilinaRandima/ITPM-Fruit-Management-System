@@ -750,6 +750,36 @@ const [fruitsPerPage] = useState(8);
                     }}
                   />
                 </div>
+                {/* Analytics Section */}
+<div className="analytics-section">
+  <h3>Grading Analytics</h3>
+  <div className="analytics-grid">
+    <div className="analytics-card">
+      <div className="analytics-value">{fruits.length}</div>
+      <div className="analytics-label">Total Items</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => ['A', 'B', 'C'].includes(f.grade)).length}
+      </div>
+      <div className="analytics-label">Acceptable Quality</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => ['E', 'F'].includes(f.grade)).length}
+      </div>
+      <div className="analytics-label">Rejected</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => f.status === 'available').length}
+      </div>
+      <div className="analytics-label">Available</div>
+    </div>
+  </div>
+</div>
+
+<div className="separator-line"></div>
                 <div className="fruit-details">
                   <h3>{fruit.name}</h3>
                   <p>
