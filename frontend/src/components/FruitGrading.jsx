@@ -131,6 +131,36 @@ const UpdateModal = ({ fruit, onClose, onUpdate, isLoading }) => {
               onChange={handleChange} 
             />
           </div>
+          <button 
+  type="button" 
+  className="cancel-button" 
+  onClick={() => {
+    // Check if form has been modified
+    const originalData = {
+      price: fruit?.price || 0,
+      quantity: fruit?.quantity || 0,
+      status: fruit?.status || 'pending',
+      expiryDate: fruit?.expiryDate ? new Date(fruit.expiryDate).toISOString().split('T')[0] : ''
+    };
+    
+    // Check if any values have changed
+    const hasChanges = Object.keys(formData).some(key => 
+      formData[key] !== originalData[key]
+    );
+    
+    // Confirm before closing if changes were made
+    if (hasChanges) {
+      if (window.confirm('You have unsaved changes. Are you sure you want to cancel?')) {
+        onClose();
+      }
+    } else {
+      onClose();
+    }
+  }}
+  disabled={isLoading}
+>
+  Cancel
+</button>
           
           <div className="update-modal-footer">
             <button 
