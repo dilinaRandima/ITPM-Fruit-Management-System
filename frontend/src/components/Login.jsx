@@ -17,7 +17,9 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailError, setEmailError] = useState('');
+const [passwordError, setPasswordError] = useState('');
   // Mock authentication function - will be replaced with actual API call later
   const authenticateUser = async (email, password, role) => {
     // This simulates an API call
@@ -158,6 +160,14 @@ const Login = ({ onLogin }) => {
             />
             <span className="input-icon">🔒</span>
           </div>
+          // Add after line 101 (after the password input field and its icon)
+<button 
+  type="button"
+  className="password-toggle"
+  onClick={() => setPasswordVisible(!passwordVisible)}
+>
+  {passwordVisible ? '👁️' : '👁️‍🗨️'}
+</button>
           
           <div className="login-options">
             <label className="remember-me">
