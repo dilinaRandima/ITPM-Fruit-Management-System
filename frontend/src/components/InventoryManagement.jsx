@@ -22,6 +22,8 @@ const InventoryManagement = () => {
   const [bulkEditMode, setBulkEditMode] = useState(false);
 const [selectedFruits, setSelectedFruits] = useState([]);
 const [bulkQuantity, setBulkQuantity] = useState('');
+const [showExpiringItems, setShowExpiringItems] = useState(false);
+const [expiryThreshold, setExpiryThreshold] = useState(7); // 7 days
   
   // New state for add/delete functionality
   const [showAddModal, setShowAddModal] = useState(false);
@@ -68,6 +70,25 @@ const [bulkQuantity, setBulkQuantity] = useState('');
     const lowStockCount = lowStockItems.length;
     const outOfStockCount = fruits.filter(fruit => !fruit.quantity || fruit.quantity <= 0).length;
     
+    // Check if a fruit is nearing expiry
+const isNearingExpiry = (expiryDate) => {
+  if (!expiryDate) return false;
+  
+  const today = new Date();
+  const expiry = new Date(expiryDate);
+  const daysUntilExpiry = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+  
+  return daysUntilExpiry > 0 && daysUntilExpiry <= expiryThreshold;
+};
+
+// Get days until expiry
+const getDaysUntilExpiry = (expiryDate) => {
+  if (!expiryDate) return null;
+  
+  const today = new Date();
+  const expiry = new Date(expiryDate);
+  return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+};
     // Calculate financial statistics
     const totalValue = fruits.reduce((sum, fruit) => 
       sum + (fruit.price || 0) * (fruit.quantity || 0), 0);
