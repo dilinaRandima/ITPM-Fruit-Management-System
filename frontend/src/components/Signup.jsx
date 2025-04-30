@@ -14,6 +14,11 @@ const Signup = ({ onSignup }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [nameError, setNameError] = useState('');
+const [emailError, setEmailError] = useState('');
+const [passwordError, setPasswordError] = useState('');
+const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
   // Add after password state declaration (around line 13)
 const [passwordStrength, setPasswordStrength] = useState({
   score: 0,
@@ -51,6 +56,30 @@ const [passwordStrength, setPasswordStrength] = useState({
       setError('Passwords do not match');
       return false;
     }
+    const validateName = (name) => {
+      if (!name.trim()) return 'Name is required';
+      if (name.trim().length < 3) return 'Name must be at least 3 characters';
+      return '';
+    };
+    
+    const validateEmail = (email) => {
+      if (!email) return 'Email is required';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) return 'Please enter a valid email address';
+      return '';
+    };
+    
+    const validatePassword = (password) => {
+      if (!password) return 'Password is required';
+      if (password.length < 8) return 'Password must be at least 8 characters';
+      return '';
+    };
+    
+    const validateConfirmPassword = (confirmPassword, password) => {
+      if (!confirmPassword) return 'Please confirm your password';
+      if (confirmPassword !== password) return 'Passwords do not match';
+      return '';
+    };
     // Add this function after validateForm (around line 47)
 const checkPasswordStrength = (password) => {
   // Basic password strength checker
