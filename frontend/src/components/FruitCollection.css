@@ -479,6 +479,8 @@
 .edit-form input:focus {
   border-color: #a4bc5a;
   outline: none;
+  box-shadow: 0 0 0 2px rgba(164, 188, 90, 0.2);
+  transition: all 0.2s ease;
 }
 
 .edit-actions {
