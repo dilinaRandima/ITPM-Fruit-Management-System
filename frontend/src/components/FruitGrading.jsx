@@ -131,6 +131,36 @@ const UpdateModal = ({ fruit, onClose, onUpdate, isLoading }) => {
               onChange={handleChange} 
             />
           </div>
+          <button 
+  type="button" 
+  className="cancel-button" 
+  onClick={() => {
+    // Check if form has been modified
+    const originalData = {
+      price: fruit?.price || 0,
+      quantity: fruit?.quantity || 0,
+      status: fruit?.status || 'pending',
+      expiryDate: fruit?.expiryDate ? new Date(fruit.expiryDate).toISOString().split('T')[0] : ''
+    };
+    
+    // Check if any values have changed
+    const hasChanges = Object.keys(formData).some(key => 
+      formData[key] !== originalData[key]
+    );
+    
+    // Confirm before closing if changes were made
+    if (hasChanges) {
+      if (window.confirm('You have unsaved changes. Are you sure you want to cancel?')) {
+        onClose();
+      }
+    } else {
+      onClose();
+    }
+  }}
+  disabled={isLoading}
+>
+  Cancel
+</button>
           
           <div className="update-modal-footer">
             <button 
@@ -236,6 +266,8 @@ const FruitGrading = () => {
     
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
+      const [currentPage, setCurrentPage] = useState(1);
+const [fruitsPerPage] = useState(8);
       result = result.filter(fruit => 
         fruit.name.toLowerCase().includes(term) || 
         fruit.collectorId.toLowerCase().includes(term)
@@ -387,6 +419,7 @@ const FruitGrading = () => {
     
     setIsLoading(true);
     setUploadStatus('Uploading image...');
+    setPreviewUrl('loading');
 
     try {
       const data = new FormData();
@@ -598,11 +631,45 @@ const FruitGrading = () => {
             {formErrors.image && <span className="error-message">{formErrors.image}</span>}
             
             {previewUrl && (
-              <div className="image-preview">
-                <img src={previewUrl} alt="Preview" />
-              </div>
-            )}
+  <div className="image-preview">
+    {previewUrl === 'loading' ? (
+      <div className="loading-preview">Loading image preview...</div>
+    ) : (
+      <img src={previewUrl} alt="Preview" />
+    )}
+  </div>
+)}
+
+<div className="form-buttons">
+  <button 
+    type="button" 
+    onClick={() => {
+      setFormData({
+        name: '',
+        variety: '',
+        collectorId: '',
+        image: null
+      });
+      setPreviewUrl(null);
+      setFormErrors({
+        name: '',
+        variety: '',
+        collectorId: '',
+        image: ''
+      });
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput) fileInput.value = '';
+    }}
+    className="reset-button"
+  >
+    Reset Form
+  </button>
+  <button type="submit" disabled={isLoading}>
+    {isLoading ? 'Processing...' : 'Upload and Grade'}
+  </button>
+</div>
           </div>
+
           
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Processing...' : 'Upload and Grade'}
@@ -713,6 +780,36 @@ const FruitGrading = () => {
                     }}
                   />
                 </div>
+                {/* Analytics Section */}
+<div className="analytics-section">
+  <h3>Grading Analytics</h3>
+  <div className="analytics-grid">
+    <div className="analytics-card">
+      <div className="analytics-value">{fruits.length}</div>
+      <div className="analytics-label">Total Items</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => ['A', 'B', 'C'].includes(f.grade)).length}
+      </div>
+      <div className="analytics-label">Acceptable Quality</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => ['E', 'F'].includes(f.grade)).length}
+      </div>
+      <div className="analytics-label">Rejected</div>
+    </div>
+    <div className="analytics-card">
+      <div className="analytics-value">
+        {fruits.filter(f => f.status === 'available').length}
+      </div>
+      <div className="analytics-label">Available</div>
+    </div>
+  </div>
+</div>
+
+<div className="separator-line"></div>
                 <div className="fruit-details">
                   <h3>{fruit.name}</h3>
                   <p>
@@ -753,6 +850,27 @@ const FruitGrading = () => {
                       <div className="score-label">Quality</div>
                     </div>
                   </div>
+                  {filteredFruits.length > 0 && (
+  <div className="pagination">
+    <button 
+      onClick={() => paginate(currentPage - 1)} 
+      disabled={currentPage === 1}
+      className="pagination-button"
+    >
+      Previous
+    </button>
+    <span className="pagination-info">
+      Page {currentPage} of {totalPages}
+    </span>
+    <button 
+      onClick={() => paginate(currentPage + 1)} 
+      disabled={currentPage === totalPages}
+      className="pagination-button"
+    >
+      Next
+    </button>
+  </div>
+)}
                   
                   <div className="fruit-card-actions">
                     <UpdateButton 

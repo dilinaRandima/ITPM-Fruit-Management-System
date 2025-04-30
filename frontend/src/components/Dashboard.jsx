@@ -4,6 +4,9 @@ import axios from 'axios';
 import './Dashboard.css';
 import domtoimage from 'dom-to-image';
 import { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
+import domtoimage from 'dom-to-image';
+
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -104,6 +107,25 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const handleDownloadpDF = () => {
+    const node = document.getElementById('dashboard-content');
+  
+    domtoimage.toPng(node)
+      .then((dataUrl) => {
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgProps = pdf.getImageProperties(dataUrl);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+        pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("dashboard.pdf");
+      })
+      .catch((error) => {
+        console.error("Error generating PDF:", error);
+      });
+  };
+  
+
   // Function to get fruit icon based on fruit name
   const getFruitIcon = (fruitName) => {
     const name = fruitName.toLowerCase();
@@ -151,6 +173,79 @@ const Dashboard = () => {
       default: return '#ccc';
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/fruits/");
+        const data = response.data;
+  
+        setFruitData(data);
+  
+        const total = data.length;
+        const accepted = data.filter(fruit => ['A', 'B', 'C'].includes(fruit.grade)).length;
+        const rejected = data.filter(fruit => ['E', 'F'].includes(fruit.grade)).length;
+  
+        setTotalFruits(total);
+        setAcceptedFruits(accepted);
+        setRejectedFruits(rejected);
+  
+        const grades = {};
+        data.forEach(fruit => {
+          grades[fruit.grade] = (grades[fruit.grade] || 0) + 1;
+        });
+        setFruitGrades(grades);
+      } catch (error) {
+        console.error("Error fetching fruit data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+  const calculateFruitTypes = () => {
+    const types = {};
+  
+    fruitData.forEach(fruit => {
+      const type = fruit.fruitType;
+      if (!types[type]) {
+        types[type] = { total: 0, accepted: 0, rejected: 0, excellent: 0 };
+      }
+      types[type].total++;
+  
+      if (['A', 'B', 'C'].includes(fruit.grade)) types[type].accepted++;
+      if (['E', 'F'].includes(fruit.grade)) types[type].rejected++;
+      if (fruit.grade === 'A') types[type].excellent++;
+    });
+  
+    setFruitTypes(types);
+  };
+  const getFruitIon = (fruitType) => {
+    const icons = {
+      Banana: "🍌",
+      Apple: "🍎",
+      Orange: "🍊",
+      Pineapple: "🍍",
+      Mango: "🥭",
+      Default: "🍇",
+    };
+  
+    const colors = {
+      Banana: "bg-yellow-200",
+      Apple: "bg-red-200",
+      Orange: "bg-orange-200",
+      Pineapple: "bg-yellow-300",
+      Mango: "bg-orange-300",
+      Default: "bg-purple-200",
+    };
+  
+    return {
+      icon: icons[fruitType] || icons.Default,
+      bgColor: colors[fruitType] || colors.Default,
+    };
+  };
+  
+  
+  
 
   // New PDF download function using dom-to-image and jsPDF
   const handleDownloadPDF = async () => {
@@ -232,7 +327,7 @@ const Dashboard = () => {
       addHeadersAndFooters();
       
       // Save the PDF
-      pdf.save('fruit-dashboard-report.pdf');
+      pdf.save('report.pdf');
       
     } catch (error) {
       console.error('Error generating PDF:', error);

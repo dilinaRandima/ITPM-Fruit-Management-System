@@ -11,7 +11,8 @@ const HomePage = () => {
   // State for animated elements
   const [isVisible, setIsVisible] = useState(false);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
-  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(Array(4).fill(false));
   // Gallery images array
   const galleryImages = [fruitGallery1, fruitGallery2, fruitGallery3, fruitGallery4];
   
@@ -26,7 +27,12 @@ const HomePage = () => {
     
     return () => clearInterval(galleryTimer);
   }, [galleryImages.length]);
-  
+  // Function to handle image loading
+const handleImageLoaded = (index) => {
+  const newLoadedState = [...imagesLoaded];
+  newLoadedState[index] = true;
+  setImagesLoaded(newLoadedState);
+};
   return (
     <div className="home-container">
       {/* Video Hero Banner Section */}
@@ -36,6 +42,30 @@ const HomePage = () => {
   <source src="/videos/fruit-video.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
+{/* Mobile Navigation */}
+<div className="mobile-nav">
+  <button 
+    className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`}
+    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    aria-label="Menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/grading">Fruit Grading</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/inventory">Inventory</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
           <div className="video-overlay"></div>
         </div>
         
@@ -73,18 +103,179 @@ const HomePage = () => {
         <h2 className="section-title fade-in">Discover Exotic Varieties</h2>
         
         <div className="gallery-container">
-          {galleryImages.map((image, index) => (
-            <div 
-              key={index}
-              className={`gallery-item ${index === activeGalleryIndex ? 'active' : ''}`}
-              style={{ backgroundImage: `url(${image})` }}
-            >
-              <div className="gallery-overlay">
-                <h3 className="gallery-title">Premium {index === 0 ? 'Tropical' : index === 1 ? 'Citrus' : index === 2 ? 'Exotic' : 'Seasonal'} Selection</h3>
-                <button className="gallery-button">Explore</button>
-              </div>
+        {galleryImages.map((image, index) => (
+  <div 
+    key={index}
+    className={`gallery-item ${index === activeGalleryIndex ? 'active' : ''}`}
+  >
+    {!imagesLoaded[index] && (
+      <div className="skeleton-loader"></div>
+    )}
+    <div
+      className={`gallery-image ${imagesLoaded[index] ? 'loaded' : ''}`}
+      style={{ backgroundImage: `url(${image})` }}
+      onLoad={() => handleImageLoaded(index)}
+    >
+      <div className="gallery-overlay">
+        <h3 className="gallery-title">Premium {index === 0 ? 'Tropical' : index === 1 ? 'Citrus' : index === 2 ? 'Exotic' : 'Seasonal'} Selection</h3>
+        <button className="gallery-button">Explore</button>
+      </div>
+    </div>
+  </div>
+))}
+{/* Featured Products Section */}
+<div className="featured-products-section">
+  <h2 className="section-title fade-in">Featured Fresh Picks</h2>
+  
+  <div className="featured-products-container">
+    {/* Product 1 */}
+    <div className="product-card">
+      <div className="product-badge">Best Seller</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/red-dragon-fruit.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Red Dragon Fruit</h3>
+        <div className="product-rating">★★★★★ <span>(24)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 450.00</span>
+          <span className="original-price">LKR 550.00</span>
+        </div>
+      </div>
+    </div>
+    {/* Quality Metrics Section */}
+<div className="quality-metrics-section">
+  <div className="quality-content">
+    <h2 className="section-title">Our Quality Standards</h2>
+    <p className="quality-description">
+      We utilize advanced AI technology to ensure only the finest fruits reach your table. 
+      Every piece is carefully graded based on these key metrics:
+    </p>
+    
+    <div className="metrics-container">
+      {/* Color Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">🎨</div>
+        <div className="metric-info">
+          <h3>Color Analysis</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '92%' }}>
+              <span className="metric-value">92%</span>
             </div>
-          ))}
+          </div>
+          <p>Our color analysis ensures fruits have reached optimal ripeness</p>
+        </div>
+      </div>
+      
+      {/* Shape Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">📏</div>
+        <div className="metric-info">
+          <h3>Shape Perfection</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '87%' }}>
+              <span className="metric-value">87%</span>
+            </div>
+          </div>
+          <p>We select fruits with consistent and ideal shapes</p>
+        </div>
+      </div>
+      
+      {/* Texture Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">👆</div>
+        <div className="metric-info">
+          <h3>Texture Assessment</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '95%' }}>
+              <span className="metric-value">95%</span>
+            </div>
+          </div>
+          <p>Texture analysis ensures the perfect bite every time</p>
+        </div>
+      </div>
+      
+      {/* Defect Detection */}
+      <div className="metric-card">
+        <div className="metric-icon">🔍</div>
+        <div className="metric-info">
+          <h3>Defect Detection</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '99%' }}>
+              <span className="metric-value">99%</span>
+            </div>
+          </div>
+          <p>Our AI detects even the smallest imperfections</p>
+        </div>
+      </div>
+    </div>
+    
+    <button className="learn-more-button">Learn About Our Process</button>
+  </div>
+</div>
+    
+    {/* Product 2 */}
+    <div className="product-card">
+      <div className="product-badge">New</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/mango-king.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Premium King Mango</h3>
+        <div className="product-rating">★★★★☆ <span>(18)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 380.00</span>
+        </div>
+      </div>
+    </div>
+    
+    {/* Product 3 */}
+    <div className="product-card">
+      <div className="product-badge">Sale</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/avocado-hass.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Hass Avocado</h3>
+        <div className="product-rating">★★★★★ <span>(32)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 290.00</span>
+          <span className="original-price">LKR 350.00</span>
+        </div>
+      </div>
+    </div>
+    
+    {/* Product 4 */}
+    <div className="product-card">
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/organic-banana.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Organic Banana Bunch</h3>
+        <div className="product-rating">★★★★☆ <span>(15)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 180.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div className="view-more-container">
+    <button className="view-more-button">View All Products</button>
+  </div>
+</div>
           
           <div className="gallery-indicators">
             {galleryImages.map((_, index) => (
@@ -131,6 +322,41 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      {/* Newsletter Signup */}
+<div className="newsletter-section">
+  <div className="newsletter-container">
+    <div className="newsletter-content">
+      <h2>Stay Updated with Fresh News</h2>
+      <p>Subscribe to our newsletter for exclusive offers, seasonal updates, and fruit care tips.</p>
+      
+      <form className="newsletter-form" onSubmit={(e) => {
+        e.preventDefault();
+        alert('Thank you for subscribing to our newsletter!');
+        e.target.reset();
+      }}>
+        <div className="form-group">
+          <input 
+            type="email" 
+            placeholder="Your email address" 
+            required 
+            className="newsletter-input"
+          />
+          <button type="submit" className="newsletter-button">Subscribe</button>
+        </div>
+        <label className="privacy-label">
+          <input type="checkbox" required />
+          <span>I agree to receive marketing emails and accept the <a href="/privacy">Privacy Policy</a></span>
+        </label>
+      </form>
+    </div>
+    <div className="newsletter-image">
+      <div className="fruit-icon fruit-icon-1">🍎</div>
+      <div className="fruit-icon fruit-icon-2">🍊</div>
+      <div className="fruit-icon fruit-icon-3">🍓</div>
+      <div className="fruit-icon fruit-icon-4">🥭</div>
+    </div>
+  </div>
+</div>
       
       {/* Testimonials Section */}
       <div className="testimonials-section">

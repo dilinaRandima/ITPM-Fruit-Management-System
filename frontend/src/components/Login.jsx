@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-
+import React, { useState, useEffect, useRef } from 'react';
 // Demo credentials for testing - removed transporter
 const VALID_CREDENTIALS = {
   'customer@gmail.com': { password: 'customer123', role: 'customer', name: 'Dilina Randima' },
@@ -17,7 +17,12 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailError, setEmailError] = useState('');
+const [passwordError, setPasswordError] = useState('');
+const [retryCount, setRetryCount] = useState(0);
+const maxRetries = 2; // Maximum number of automatic retries
+const retryTimeoutRef = useRef(null);
   // Mock authentication function - will be replaced with actual API call later
   const authenticateUser = async (email, password, role) => {
     // This simulates an API call
@@ -37,6 +42,7 @@ const Login = ({ onLogin }) => {
           // Use the appropriate user info based on where it was found
           const validUserInfo = userInfo || registeredUserInfo;
           
+          
           resolve({
             success: true,
             user: {
@@ -55,6 +61,77 @@ const Login = ({ onLogin }) => {
       }, 1000); // Simulate network delay
     });
   };
+  
+  
+  useEffect(() => {
+    // Check for existing token and user data
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      try {
+        const user = JSON.parse(savedUser);
+        // Auto-redirect if token exists
+        onLogin(user);
+        
+        switch (user.role) {
+          case 'admin':
+            navigate('/dashboard');
+            break;
+          default:
+            navigate('/home');
+            break;
+        }
+      } catch (err) {
+        // Handle corrupted data
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        console.error('Error parsing saved user data:', err);
+      }
+    }
+  }, [navigate, onLogin]);
+  const handleAuthError = (err) => {
+    // Clear any existing retry timeout
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current);
+    }
+    
+    // Determine error type and display appropriate message
+    if (!navigator.onLine) {
+      setError('You appear to be offline. Please check your internet connection.');
+    } else if (err.message && err.message.includes('timeout')) {
+      setError('Server is taking too long to respond. Please try again later.');
+      
+      // Auto-retry logic for timeouts
+      if (retryCount < maxRetries) {
+        setError(`Connection timed out. Retrying (${retryCount + 1}/${maxRetries})...`);
+        retryTimeoutRef.current = setTimeout(() => {
+          setRetryCount(prev => prev + 1);
+          handleSubmit(new Event('autoRetry'));
+        }, 2000); // Wait 2 seconds before retry
+      } else {
+        setError('Unable to connect after multiple attempts. Please try again later.');
+        setRetryCount(0); // Reset for next manual attempt
+      }
+    } else {
+      // Generic error with technical details in console for debugging
+      setError('An unexpected error occurred. Please try again.');
+      console.error('Login error details:', err);
+    }
+  };
+  
+  // Modify the catch block in handleSubmit around line 66
+  
+  
+  // Add cleanup for any pending retries when component unmounts
+  // Place this after the first useEffect
+  useEffect(() => {
+    return () => {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,6 +145,18 @@ const Login = ({ onLogin }) => {
 
     try {
       setIsLoading(true);
+      <button 
+  type="submit" 
+  className={`login-button ${isLoading ? 'login-loading' : ''}`}
+  disabled={isLoading}
+>
+  {isLoading ? (
+    <>
+      <span className="spinner"></span>
+      <span>Signing In...</span>
+    </>
+  ) : 'Sign In'}
+</button>
       
       // Use the mock authentication for now
       const response = await authenticateUser(email, password, selectedRole);
@@ -99,6 +188,7 @@ const Login = ({ onLogin }) => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="login-container">
@@ -109,7 +199,11 @@ const Login = ({ onLogin }) => {
           <p>The complete fruit management system for fruit collecting and distribution</p>
         </div>
       </div>
-      
+      // After email input field (around line 87)
+{emailError && <div className="field-error">{emailError}</div>}
+
+// After password input field (around line 96)
+{passwordError && <div className="field-error">{passwordError}</div>}
       <div className="login-form-section">
         <div className="login-header">
           <img src="/log8.png" alt="Fresh Route Logo" className="login-logo" />
@@ -158,6 +252,14 @@ const Login = ({ onLogin }) => {
             />
             <span className="input-icon">🔒</span>
           </div>
+          // Add after line 101 (after the password input field and its icon)
+<button 
+  type="button"
+  className="password-toggle"
+  onClick={() => setPasswordVisible(!passwordVisible)}
+>
+  {passwordVisible ? '👁️' : '👁️‍🗨️'}
+</button>
           
           <div className="login-options">
             <label className="remember-me">

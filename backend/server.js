@@ -17,8 +17,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// JWT Secret Key (use environment variable in production)
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
 
 // Middleware
 app.use(cors());
@@ -316,6 +315,15 @@ app.get('/api/admin/stats', authenticate, authorize(['admin']), async (req, res)
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+app.get('/api/admin/stats/ids', authenticate, authorize(['admin']), async (req, res) => {
+    try {
+      res.json({ message: 'selected admin stats accessed successfully' });
+    } catch (error) {
+      console.error('stats error:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
 
 // ===== FRUIT ROUTES =====
 
