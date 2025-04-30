@@ -212,6 +212,51 @@ const FruitCollection = () => {
     }
   };
 
+  //Function to validate expiry date
+  const validateExpiryDate = (date) => {
+    // Reset error state
+    setDateError('');
+    setIsFormValid(true);
+    
+    // Return true if valid, false if invalid
+    if (!date) {
+      setDateError('Expiry date is required');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    const selectedDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time part for comparison
+    
+    if (selectedDate < today) {
+      setDateError('Expiry date cannot be in the past');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 1); // Max one year from now
+    
+    if (selectedDate > maxDate) {
+      setDateError('Expiry date cannot be more than 1 year in the future');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    // Check if it's less than a week from now and return true but set a warning
+    const oneWeekFromNow = new Date();
+    oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+    
+    if (selectedDate < oneWeekFromNow) {
+      setDateError('Warning: Expiry date is less than 7 days from now');
+      // Still valid, just a warning
+      return true;
+    }
+    
+    return true;
+  };
+
   // Format price as LKR
   const formatPrice = (price) => {
     return `LKR ${price?.toFixed(2) || '0.00'}`;
