@@ -141,6 +141,7 @@
   border-color: #a4bc5a;
   outline: none;
   box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
+  background-color: #fafff7;
 }
 
 /* Card number specific styling */
