@@ -8,6 +8,7 @@
   padding: 20px 40px 40px;
   font-family: 'Canva Sans', 'Poppins', sans-serif;
   animation: fadeIn 0.8s ease-out forwards;
+  border: 1px solid #ececec;
 }
 
 /* Back link */
