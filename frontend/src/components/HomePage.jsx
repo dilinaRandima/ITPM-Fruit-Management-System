@@ -12,6 +12,7 @@ const HomePage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(Array(4).fill(false));
   // Gallery images array
   const galleryImages = [fruitGallery1, fruitGallery2, fruitGallery3, fruitGallery4];
   
@@ -26,7 +27,12 @@ const HomePage = () => {
     
     return () => clearInterval(galleryTimer);
   }, [galleryImages.length]);
-  
+  // Function to handle image loading
+const handleImageLoaded = (index) => {
+  const newLoadedState = [...imagesLoaded];
+  newLoadedState[index] = true;
+  setImagesLoaded(newLoadedState);
+};
   return (
     <div className="home-container">
       {/* Video Hero Banner Section */}
@@ -97,18 +103,26 @@ const HomePage = () => {
         <h2 className="section-title fade-in">Discover Exotic Varieties</h2>
         
         <div className="gallery-container">
-          {galleryImages.map((image, index) => (
-            <div 
-              key={index}
-              className={`gallery-item ${index === activeGalleryIndex ? 'active' : ''}`}
-              style={{ backgroundImage: `url(${image})` }}
-            >
-              <div className="gallery-overlay">
-                <h3 className="gallery-title">Premium {index === 0 ? 'Tropical' : index === 1 ? 'Citrus' : index === 2 ? 'Exotic' : 'Seasonal'} Selection</h3>
-                <button className="gallery-button">Explore</button>
-              </div>
-            </div>
-          ))}
+        {galleryImages.map((image, index) => (
+  <div 
+    key={index}
+    className={`gallery-item ${index === activeGalleryIndex ? 'active' : ''}`}
+  >
+    {!imagesLoaded[index] && (
+      <div className="skeleton-loader"></div>
+    )}
+    <div
+      className={`gallery-image ${imagesLoaded[index] ? 'loaded' : ''}`}
+      style={{ backgroundImage: `url(${image})` }}
+      onLoad={() => handleImageLoaded(index)}
+    >
+      <div className="gallery-overlay">
+        <h3 className="gallery-title">Premium {index === 0 ? 'Tropical' : index === 1 ? 'Citrus' : index === 2 ? 'Exotic' : 'Seasonal'} Selection</h3>
+        <button className="gallery-button">Explore</button>
+      </div>
+    </div>
+  </div>
+))}
           
           <div className="gallery-indicators">
             {galleryImages.map((_, index) => (
