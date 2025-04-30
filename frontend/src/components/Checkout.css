@@ -59,7 +59,7 @@
 .checkout-card {
   background: white;
   border-radius: 15px;
-  padding: 25px;
+  padding: 30px 25px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   animation: fadeInUp 0.8s forwards calc(0.4s + var(--delay, 0s));
   opacity: 0;
