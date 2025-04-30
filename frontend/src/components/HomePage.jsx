@@ -11,7 +11,7 @@ const HomePage = () => {
   // State for animated elements
   const [isVisible, setIsVisible] = useState(false);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
-  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Gallery images array
   const galleryImages = [fruitGallery1, fruitGallery2, fruitGallery3, fruitGallery4];
   
@@ -36,6 +36,30 @@ const HomePage = () => {
   <source src="/videos/fruit-video.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
+{/* Mobile Navigation */}
+<div className="mobile-nav">
+  <button 
+    className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`}
+    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    aria-label="Menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/grading">Fruit Grading</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/inventory">Inventory</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
           <div className="video-overlay"></div>
         </div>
         
