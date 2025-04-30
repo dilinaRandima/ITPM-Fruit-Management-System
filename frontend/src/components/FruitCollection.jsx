@@ -457,16 +457,25 @@ const FruitCollection = () => {
                           />
                         </div>
                         
-                        <div className="form-group">
-                          <label>Expiry Date:</label>
+                      <div className="form-group">
+                        <label>Expiry Date: <span className="required-field">*</span></label>
+                        <div className="date-input-container">
                           <input 
                             type="date" 
                             name="expiryDate" 
                             value={editingFruit.expiryDate}
                             onChange={handleEditChange}
                             min={new Date().toISOString().split('T')[0]}
+                            className={dateError ? 'input-error' : ''}
+                            required
                           />
+                          {dateError && (
+                            <div className={`date-validation-message ${dateError.includes('Warning') ? 'warning' : 'error'}`}>
+                              {dateError}
+                            </div>
+                          )}
                         </div>
+                      </div>
                         
                         <div className="edit-actions">
                           <button 
