@@ -14,6 +14,13 @@ const Signup = ({ onSignup }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  // Add after password state declaration (around line 13)
+const [passwordStrength, setPasswordStrength] = useState({
+  score: 0,
+  message: '',
+  color: 'red'
+});
+
 
   // Validate the form
   const validateForm = () => {
@@ -44,6 +51,48 @@ const Signup = ({ onSignup }) => {
       setError('Passwords do not match');
       return false;
     }
+    // Add this function after validateForm (around line 47)
+const checkPasswordStrength = (password) => {
+  // Basic password strength checker
+  let score = 0;
+  let message = '';
+  let color = 'red';
+  
+  if (password.length >= 8) score += 1;
+  if (/[A-Z]/.test(password)) score += 1;
+  if (/[a-z]/.test(password)) score += 1;
+  if (/[0-9]/.test(password)) score += 1;
+  if (/[^A-Za-z0-9]/.test(password)) score += 1;
+  
+  switch(score) {
+    case 0:
+    case 1:
+      message = 'Very Weak';
+      color = 'red';
+      break;
+    case 2:
+      message = 'Weak';
+      color = 'orange';
+      break;
+    case 3:
+      message = 'Moderate';
+      color = 'yellow';
+      break;
+    case 4:
+      message = 'Strong';
+      color = 'lightgreen';
+      break;
+    case 5:
+      message = 'Very Strong';
+      color = 'green';
+      break;
+    default:
+      message = 'Very Weak';
+      color = 'red';
+  }
+  
+  return { score, message, color };
+};
     
     // Check if email is already registered
     const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
