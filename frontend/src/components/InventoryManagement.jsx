@@ -19,6 +19,9 @@ const InventoryManagement = () => {
   const [lowStockThreshold, setLowStockThreshold] = useState(50);
   const [showLowStock, setShowLowStock] = useState(false);
   const [showOutOfStock, setShowOutOfStock] = useState(false);
+  const [bulkEditMode, setBulkEditMode] = useState(false);
+const [selectedFruits, setSelectedFruits] = useState([]);
+const [bulkQuantity, setBulkQuantity] = useState('');
   
   // New state for add/delete functionality
   const [showAddModal, setShowAddModal] = useState(false);
@@ -223,6 +226,59 @@ const InventoryManagement = () => {
       
       // Reset editing state
       setEditingFruit(null);
+      setIsLoading(false);
+    } catch (err) {
+      console.error('Error updating inventory:', err);
+      setError('Failed to update inventory. Please try again.');
+      setIsLoading(false);
+    }
+  };
+  const toggleBulkEditMode = () => {
+    setBulkEditMode(!bulkEditMode);
+    setSelectedFruits([]);
+    setBulkQuantity('');
+  };
+  
+  const toggleFruitSelection = (fruitId) => {
+    setSelectedFruits(prev => 
+      prev.includes(fruitId) 
+        ? prev.filter(id => id !== fruitId) 
+        : [...prev, fruitId]
+    );
+  };
+  
+  const applyBulkUpdate = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      // Validate bulk quantity
+      const quantity = parseInt(bulkQuantity, 10);
+      if (isNaN(quantity) || quantity < 0) {
+        setError('Please enter a valid quantity (0 or positive number)');
+        setIsLoading(false);
+        return;
+      }
+      
+      // Make API calls to update each selected fruit
+      const updatePromises = selectedFruits.map(fruitId => 
+        axios.put(`http://localhost:3001/api/fruits/${fruitId}`, { quantity })
+      );
+      
+      const responses = await Promise.all(updatePromises);
+      
+      // Update local state with new data
+      setFruits(prev => prev.map(fruit => {
+        const updatedFruit = responses.find(r => r.data._id === fruit._id);
+        return updatedFruit ? updatedFruit.data : fruit;
+      }));
+      
+      // Show success message
+      setSuccessMessage(`Updated quantity for ${selectedFruits.length} items successfully!`);
+      setTimeout(() => setSuccessMessage(''), 3000);
+      
+      // Exit bulk edit mode
+      toggleBulkEditMode();
       setIsLoading(false);
     } catch (err) {
       console.error('Error updating inventory:', err);
