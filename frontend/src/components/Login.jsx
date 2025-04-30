@@ -111,7 +111,11 @@ const [passwordError, setPasswordError] = useState('');
           <p>The complete fruit management system for fruit collecting and distribution</p>
         </div>
       </div>
-      
+      // After email input field (around line 87)
+{emailError && <div className="field-error">{emailError}</div>}
+
+// After password input field (around line 96)
+{passwordError && <div className="field-error">{passwordError}</div>}
       <div className="login-form-section">
         <div className="login-header">
           <img src="/log8.png" alt="Fresh Route Logo" className="login-logo" />
