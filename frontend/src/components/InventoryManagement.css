@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/canva-sans');
 
+/* Add to the global styles, after the font imports */
+:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+}
+
 .inventory-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -236,8 +242,9 @@
   color: #a4bc5a;
 }
 
+/* Update the following selectors to improve color contrast */
 .stat-card.low-stock .stat-value {
-  color: #dd6b20;
+  color: #c05621; /* Darker orange for better contrast */
 }
 
 .stat-card.out-of-stock .stat-value {
@@ -516,9 +523,10 @@
   background: linear-gradient(45deg, #3182CE, #2B6CB0);
 }
 
+/* Update the following selectors to improve color contrast */
 .grade-badge.grade-c {
-  background: linear-gradient(45deg, #ECC94B, #D69E2E);
-  color: #2D3748;
+  background: linear-gradient(45deg, #D69E2E, #B7791F);
+  color: #ffffff; /* White text for better contrast */
 }
 
 .grade-badge.grade-e {
@@ -853,6 +861,13 @@
   box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
 }
 
+/* Enhance form field focus states after the current focus styles */
+.form-group input:focus-visible,
+.form-group select:focus-visible {
+  outline: 3px solid #3182ce;
+  border-color: #3182ce;
+}
+
 .form-group small {
   font-size: 12px;
   color: #777;
@@ -1005,7 +1020,7 @@ input[type="file"] {
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
-  font-family: 'Canva Sans', sans-serif;
+  font-family: 'Canva Sans
 }
 
 .cancel-button:hover {
