@@ -18,6 +18,8 @@ const FruitCollection = () => {
   const [editingFruit, setEditingFruit] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [showManualAdd, setShowManualAdd] = useState(false);
+  const [dateError, setDateError] = useState('');
+  const [isFormValid, setIsFormValid] = useState(true);
 
   useEffect(() => {
     fetchFruits();
