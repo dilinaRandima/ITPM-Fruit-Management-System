@@ -90,6 +90,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(164, 188, 90, 0.2);
+  transition: all 0.25s ease;
 }
 
 .toggle-button:hover {
@@ -114,6 +115,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
+  transition: all 0.25s ease;
 }
 
 .back-button:hover {
@@ -265,8 +267,9 @@
 }
 
 .fruit-collection-card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Card Header */
@@ -427,6 +430,7 @@
 .edit-button {
   background: linear-gradient(45deg, #a4bc5a, #8aa548);
   color: white;
+  transition: all 0.25s ease;
 }
 
 .edit-button:hover {
@@ -438,6 +442,7 @@
 .delete-button {
   background: linear-gradient(45deg, #E53E3E, #C53030);
   color: white;
+  transition: all 0.25s ease;
 }
 
 .delete-button:hover {
@@ -478,6 +483,8 @@
 .edit-form input:focus {
   border-color: #a4bc5a;
   outline: none;
+  box-shadow: 0 0 0 2px rgba(164, 188, 90, 0.2);
+  transition: all 0.2s ease;
 }
 
 .edit-actions {

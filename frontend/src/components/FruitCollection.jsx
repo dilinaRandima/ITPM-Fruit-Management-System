@@ -18,6 +18,8 @@ const FruitCollection = () => {
   const [editingFruit, setEditingFruit] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [showManualAdd, setShowManualAdd] = useState(false);
+  const [dateError, setDateError] = useState('');
+  const [isFormValid, setIsFormValid] = useState(true);
 
   useEffect(() => {
     fetchFruits();
@@ -121,6 +123,11 @@ const FruitCollection = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === 'expiryDate') {
+      validateExpiryDate(value);
+    }
+    
     setEditingFruit({
       ...editingFruit,
       [name]: name === 'price' ? parseFloat(value) : value
@@ -128,6 +135,11 @@ const FruitCollection = () => {
   };
 
   const saveChanges = async () => {
+    // Validate before saving
+    if (!validateExpiryDate(editingFruit.expiryDate)) {
+      return; // Don't proceed if invalid
+    }
+    
     try {
       setIsLoading(true);
       
@@ -208,6 +220,51 @@ const FruitCollection = () => {
       case 'C': return 'grade-c';
       default: return '';
     }
+  };
+
+  //Function to validate expiry date
+  const validateExpiryDate = (date) => {
+    // Reset error state
+    setDateError('');
+    setIsFormValid(true);
+    
+    // Return true if valid, false if invalid
+    if (!date) {
+      setDateError('Expiry date is required');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    const selectedDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time part for comparison
+    
+    if (selectedDate < today) {
+      setDateError('Expiry date cannot be in the past');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 1); // Max one year from now
+    
+    if (selectedDate > maxDate) {
+      setDateError('Expiry date cannot be more than 1 year in the future');
+      setIsFormValid(false);
+      return false;
+    }
+    
+    // Check if it's less than a week from now and return true but set a warning
+    const oneWeekFromNow = new Date();
+    oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+    
+    if (selectedDate < oneWeekFromNow) {
+      setDateError('Warning: Expiry date is less than 7 days from now');
+      // Still valid, just a warning
+      return true;
+    }
+    
+    return true;
   };
 
   // Format price as LKR
@@ -400,22 +457,31 @@ const FruitCollection = () => {
                           />
                         </div>
                         
-                        <div className="form-group">
-                          <label>Expiry Date:</label>
+                      <div className="form-group">
+                        <label>Expiry Date: <span className="required-field">*</span></label>
+                        <div className="date-input-container">
                           <input 
                             type="date" 
                             name="expiryDate" 
                             value={editingFruit.expiryDate}
                             onChange={handleEditChange}
                             min={new Date().toISOString().split('T')[0]}
+                            className={dateError ? 'input-error' : ''}
+                            required
                           />
+                          {dateError && (
+                            <div className={`date-validation-message ${dateError.includes('Warning') ? 'warning' : 'error'}`}>
+                              {dateError}
+                            </div>
+                          )}
                         </div>
+                      </div>
                         
                         <div className="edit-actions">
                           <button 
                             className="save-button" 
                             onClick={saveChanges}
-                            disabled={isLoading}
+                            disabled={isLoading || !isFormValid}
                           >
                             Save Changes
                           </button>
