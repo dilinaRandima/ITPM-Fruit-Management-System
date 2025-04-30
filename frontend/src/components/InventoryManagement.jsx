@@ -28,6 +28,9 @@ const [showImportModal, setShowImportModal] = useState(false);
 const [importFile, setImportFile] = useState(null);
 const [isImporting, setIsImporting] = useState(false);
 const importFileRef = useRef(null);
+const [showBatchExpiredModal, setShowBatchExpiredModal] = useState(false);
+const [batchAction, setBatchAction] = useState('zero-quantity');
+const [batchDiscount, setBatchDiscount] = useState(20); // 20% discount
   
   // New state for add/delete functionality
   const [showAddModal, setShowAddModal] = useState(false);
@@ -391,6 +394,89 @@ const getDaysUntilExpiry = (expiryDate) => {
     setSelectedFruits([]);
     setBulkQuantity('');
   };
+  // Process batch operation on expired items
+const processBatchExpiredItems = async () => {
+  try {
+    setIsLoading(true);
+    setError(null);
+    
+    // Get all expired items
+    const expiredItems = fruits.filter(fruit => 
+      fruit.expiryDate && new Date(fruit.expiryDate) < new Date()
+    );
+    
+    if (expiredItems.length === 0) {
+      setError('No expired items found');
+      setIsLoading(false);
+      return;
+    }
+    
+    const updates = [];
+    
+    // Apply the selected batch action
+    switch (batchAction) {
+      case 'zero-quantity':
+        // Set quantity to 0 for all expired items
+        for (const item of expiredItems) {
+          const response = await axios.put(
+            `http://localhost:3001/api/fruits/${item._id}`,
+            { quantity: 0 }
+          );
+          updates.push(response.data);
+        }
+        break;
+        
+      case 'apply-discount':
+        // Apply discount to all expired items
+        for (const item of expiredItems) {
+          const discountedPrice = (item.price || 0) * (1 - batchDiscount / 100);
+          const response = await axios.put(
+            `http://localhost:3001/api/fruits/${item._id}`,
+            { price: discountedPrice }
+          );
+          updates.push(response.data);
+        }
+        break;
+        
+      case 'delete':
+        // Delete all expired items
+        for (const item of expiredItems) {
+          await axios.delete(`http://localhost:3001/api/fruits/${item._id}`);
+        }
+        break;
+    }
+    
+    // Update local state
+    if (batchAction === 'delete') {
+      // Remove all expired items from state
+      setFruits(prev => prev.filter(fruit => 
+        !(fruit.expiryDate && new Date(fruit.expiryDate) < new Date())
+      ));
+    } else {
+      // Update fruits with new data
+      setFruits(prev => prev.map(fruit => {
+        const updatedFruit = updates.find(u => u._id === fruit._id);
+        return updatedFruit || fruit;
+      }));
+    }
+    
+    // Show success message
+    const actionText = 
+      batchAction === 'zero-quantity' ? 'marked as out of stock' : 
+      batchAction === 'apply-discount' ? `discounted by ${batchDiscount}%` : 'deleted';
+    
+    setSuccessMessage(`${expiredItems.length} expired items successfully ${actionText}!`);
+    setTimeout(() => setSuccessMessage(''), 3000);
+    
+    // Close modal
+    setShowBatchExpiredModal(false);
+    setIsLoading(false);
+  } catch (err) {
+    console.error('Error processing batch operation:', err);
+    setError('Failed to process batch operation. Please try again.');
+    setIsLoading(false);
+  }
+};
   
   const toggleFruitSelection = (fruitId) => {
     setSelectedFruits(prev => 
