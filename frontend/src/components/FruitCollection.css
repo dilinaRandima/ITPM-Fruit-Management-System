@@ -115,6 +115,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
+  transition: all 0.25s ease;
 }
 
 .back-button:hover {
