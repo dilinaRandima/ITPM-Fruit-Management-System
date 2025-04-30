@@ -28,6 +28,7 @@
   cursor: pointer;
   animation: fadeIn 0.6s forwards 0.2s;
   opacity: 0;
+  text-transform: uppercase;
 }
 
 .back-link:hover {
@@ -208,7 +209,7 @@
 .edit-form-card {
   background: white;
   border-radius: 15px;
-  padding: 30px;
+  padding: 32px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
   position: relative;
