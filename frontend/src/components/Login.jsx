@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+import React, { useState, useEffect } from 'react';
 
 // Demo credentials for testing - removed transporter
 const VALID_CREDENTIALS = {
@@ -57,6 +58,33 @@ const [passwordError, setPasswordError] = useState('');
       }, 1000); // Simulate network delay
     });
   };
+  useEffect(() => {
+    // Check for existing token and user data
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      try {
+        const user = JSON.parse(savedUser);
+        // Auto-redirect if token exists
+        onLogin(user);
+        
+        switch (user.role) {
+          case 'admin':
+            navigate('/dashboard');
+            break;
+          default:
+            navigate('/home');
+            break;
+        }
+      } catch (err) {
+        // Handle corrupted data
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        console.error('Error parsing saved user data:', err);
+      }
+    }
+  }, [navigate, onLogin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
