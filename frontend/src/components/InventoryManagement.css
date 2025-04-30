@@ -1,3 +1,4 @@
+
 /* src/components/InventoryManagement.css with enhancements to match FruitCollection style */
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/canva-sans');
@@ -1020,7 +1021,7 @@ input[type="file"] {
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
-  font-family: 'Canva Sans
+  font-family: 'Canva Sans', sans-serif;
 }
 
 .cancel-button:hover {
