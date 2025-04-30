@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'; // Reusing the Login CSS
+import React, { useState, useRef } from 'react';
 
 const Signup = ({ onSignup }) => {
   // Navigate hook for redirection
@@ -16,6 +17,11 @@ const Signup = ({ onSignup }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [nameError, setNameError] = useState('');
 const [emailError, setEmailError] = useState('');
+const [recoveryEmail, setRecoveryEmail] = useState('');
+const [showRecoveryField, setShowRecoveryField] = useState(false);
+const [recoveryEmailError, setRecoveryEmailError] = useState('');
+const [socialLoading, setSocialLoading] = useState('');
+const formRef = useRef(null);
 const [showConfirmation, setShowConfirmation] = useState(false);
 const [passwordError, setPasswordError] = useState('');
 const [confirmPasswordError, setConfirmPasswordError] = useState('');
