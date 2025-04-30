@@ -1214,6 +1214,99 @@ input[type="file"] {
   gap: 15px;
 }
 
+
+/* Add to the responsive section at the end of the file, before media queries */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .action-button,
+  .filter-button,
+  .submit-button,
+  .cancel-button,
+  .save-button,
+  .update-button,
+  .delete-button {
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  
+  .tab-button {
+    padding: 15px 20px;
+  }
+  
+  /* Better spacing between interactive elements */
+  .filter-options {
+    gap: 12px;
+  }
+  
+  /* Custom scrollbar for touch */
+  .inventory-table-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  
+  /* Slightly increase text size for readability */
+  .form-group label,
+  .inventory-table td,
+  .inventory-table th {
+    font-size: 16px;
+  }
+  
+  /* Bottom floating action button for mobile */
+  .mobile-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #a4bc5a, #8aa548);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-fab:hover,
+  .mobile-fab:active {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #8aa548, #768e3d);
+  }
+}
+
+/* Add this additional media query for smaller screens */
+@media (max-width: 576px) {
+  .form-columns {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .inventory-table {
+    font-size: 14px;
+  }
+  
+  .inventory-title {
+    font-size: 2rem;
+  }
+  
+  .inventory-tabs {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tab-button {
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+}
+
+
 /* Report modal styling */
 .report-modal {
   max-width: 500px;
