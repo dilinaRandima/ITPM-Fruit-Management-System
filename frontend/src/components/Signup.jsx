@@ -16,6 +16,7 @@ const Signup = ({ onSignup }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [nameError, setNameError] = useState('');
 const [emailError, setEmailError] = useState('');
+const [showConfirmation, setShowConfirmation] = useState(false);
 const [passwordError, setPasswordError] = useState('');
 const [confirmPasswordError, setConfirmPasswordError] = useState('');
 const [passwordVisible, setPasswordVisible] = useState(false);
@@ -84,6 +85,40 @@ const [passwordStrength, setPasswordStrength] = useState({
       if (name.trim().length < 3) return 'Name must be at least 3 characters';
       return '';
     };
+    setSuccessMessage('Registration successful! You can now login with your credentials.');
+// Auto-redirect to login page after 2 seconds
+setTimeout(() => {
+  navigate('/login');
+}, 2000);
+
+// With this:
+setSuccessMessage('Registration successful!');
+setShowConfirmation(true);
+// Don't auto-redirect - let user click to continue
+
+// Add at the end of the form but before the closing div (around line 195)
+{showConfirmation && (
+  <div className="confirmation-popup">
+    <div className="confirmation-content">
+      <div className="confirmation-icon">✅</div>
+      <h3>Account Created Successfully!</h3>
+      <p>Your account has been created and is ready to use.</p>
+      <button 
+        onClick={() => navigate('/login')} 
+        className="confirmation-button"
+      >
+        Proceed to Login
+      </button>
+    </div>
+  </div>
+)}
+
+// Add to the return statement of handleSubmit, in the setTimeout callback (around line 88)
+// Instead of auto-redirecting, update the success message animation
+setIsLoading(false);
+// Show the success message with animation
+setSuccessMessage('Registration successful!');
+setShowConfirmation(true);
     
     const validateEmail = (email) => {
       if (!email) return 'Email is required';
