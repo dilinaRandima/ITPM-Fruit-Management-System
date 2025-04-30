@@ -264,8 +264,8 @@
 .threshold-button {
   width: 32px;
   height: 32px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
+  background-color: #1834d6;
+  border: 1px solid #6c0fa6;
   border-radius: 5px;
   font-size: 18px;
   display: flex;
@@ -276,7 +276,7 @@
 }
 
 .threshold-button:hover {
-  background-color: #e0e0e0;
+  background-color: #2c9c1b;
 }
 
 .threshold-value {
@@ -367,8 +367,8 @@
 }
 
 .filter-button.active {
-  background-color: #a4bc5a;
-  color: white;
+  background-color: #b0e70c;
+  color: rgb(207, 189, 06, 58, 58);
   border-color: #8aa548;
 }
 

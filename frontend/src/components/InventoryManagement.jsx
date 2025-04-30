@@ -19,6 +19,18 @@ const InventoryManagement = () => {
   const [lowStockThreshold, setLowStockThreshold] = useState(50);
   const [showLowStock, setShowLowStock] = useState(false);
   const [showOutOfStock, setShowOutOfStock] = useState(false);
+  const [bulkEditMode, setBulkEditMode] = useState(false);
+const [selectedFruits, setSelectedFruits] = useState([]);
+const [bulkQuantity, setBulkQuantity] = useState('');
+const [showExpiringItems, setShowExpiringItems] = useState(false);
+const [expiryThreshold, setExpiryThreshold] = useState(7); // 7 days
+const [showImportModal, setShowImportModal] = useState(false);
+const [importFile, setImportFile] = useState(null);
+const [isImporting, setIsImporting] = useState(false);
+const importFileRef = useRef(null);
+const [showBatchExpiredModal, setShowBatchExpiredModal] = useState(false);
+const [batchAction, setBatchAction] = useState('zero-quantity');
+const [batchDiscount, setBatchDiscount] = useState(20); // 20% discount
   
   // New state for add/delete functionality
   const [showAddModal, setShowAddModal] = useState(false);
@@ -44,7 +56,10 @@ const InventoryManagement = () => {
   const [stats, setStats] = useState({
     total: 0,
     lowStock: 0,
-    outOfStock: 0
+    outOfStock: 0,
+    totalValue: 0,
+    lowStockValue: 0,
+    avgPrice: 0
   });
 
   useEffect(() => {
@@ -58,16 +73,160 @@ const InventoryManagement = () => {
   // Calculate stats whenever fruits change
   useEffect(() => {
     const totalFruits = fruits.length;
-    const lowStockCount = fruits.filter(fruit => fruit.quantity > 0 && fruit.quantity <= lowStockThreshold).length;
+    const lowStockItems = fruits.filter(fruit => fruit.quantity > 0 && fruit.quantity <= lowStockThreshold);
+    const lowStockCount = lowStockItems.length;
     const outOfStockCount = fruits.filter(fruit => !fruit.quantity || fruit.quantity <= 0).length;
+ // Export entire inventory data
+const exportInventory = () => {
+  try {
+    // Format data for export
+    const exportData = fruits.map(fruit => ({
+      name: fruit.name,
+      grade: fruit.grade,
+      price: fruit.price || 0,
+      quantity: fruit.quantity || 0,
+      collectionDate: fruit.collectionDate,
+      expiryDate: fruit.expiryDate,
+      collectorId: fruit.collectorId
+    }));
+    
+    // Generate JSON
+    const json = JSON.stringify(exportData, null, 2);
+    downloadFile(json, `full-inventory-export-${new Date().toISOString().split('T')[0]}.json`, 'application/json');
+    
+    // Show success message
+    setSuccessMessage('Inventory exported successfully!');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  } catch (err) {
+    console.error('Error exporting inventory:', err);
+    setError('Failed to export inventory');
+  }
+};
+
+// Handle file selection for import
+const handleImportFileChange = (e) => {
+  if (e.target.files && e.target.files[0]) {
+    setImportFile(e.target.files[0]);
+  }
+};
+
+// Process the import file
+const processImport = async () => {
+  if (!importFile) {
+    setError('Please select a file to import');
+    return;
+  }
+  
+  try {
+    setIsImporting(true);
+    setError(null);
+    
+    // Read the file
+    const reader = new FileReader();
+    
+    reader.onload = async (e) => {
+      try {
+        // Parse the JSON data
+        const importData = JSON.parse(e.target.result);
+        
+        if (!Array.isArray(importData)) {
+          throw new Error('Invalid import format. Expected an array of items.');
+        }
+        
+        // Validate each item
+        const validItems = importData.filter(item => 
+          item.name && 
+          (item.grade === 'A' || item.grade === 'B' || item.grade === 'C') &&
+          !isNaN(parseFloat(item.price)) && 
+          !isNaN(parseInt(item.quantity))
+        );
+        
+        if (validItems.length === 0) {
+          throw new Error('No valid items found in import file');
+        }
+        
+        // Send import data to server
+        const response = await axios.post(
+          'http://localhost:3001/api/fruits/bulk-import',
+          { items: validItems }
+        );
+        
+        // Update local state with new data
+        if (response.data.success) {
+          // Refresh inventory data
+          fetchFruits();
+          
+          // Show success message
+          setSuccessMessage(
+            `Import successful! Added ${response.data.added} items, updated ${response.data.updated} items.`
+          );
+          setTimeout(() => setSuccessMessage(''), 5000);
+          
+          // Close modal and reset state
+          setShowImportModal(false);
+          setImportFile(null);
+          if (importFileRef.current) {
+            importFileRef.current.value = '';
+          }
+        }
+      } catch (err) {
+        console.error('Error processing import:', err);
+        setError(`Import failed: ${err.message}`);
+      } finally {
+        setIsImporting(false);
+      }
+    };
+    
+    reader.onerror = () => {
+      setError('Failed to read the import file');
+      setIsImporting(false);
+    };
+    
+    reader.readAsText(importFile);
+  } catch (err) {
+    console.error('Error during import:', err);
+    setError(`Import failed: ${err.message}`);
+    setIsImporting(false);
+  }
+};   
+    // Check if a fruit is nearing expiry
+const isNearingExpiry = (expiryDate) => {
+  if (!expiryDate) return false;
+  
+  const today = new Date();
+  const expiry = new Date(expiryDate);
+  const daysUntilExpiry = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+  
+  return daysUntilExpiry > 0 && daysUntilExpiry <= expiryThreshold;
+};
+
+// Get days until expiry
+const getDaysUntilExpiry = (expiryDate) => {
+  if (!expiryDate) return null;
+  
+  const today = new Date();
+  const expiry = new Date(expiryDate);
+  return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+};
+    // Calculate financial statistics
+    const totalValue = fruits.reduce((sum, fruit) => 
+      sum + (fruit.price || 0) * (fruit.quantity || 0), 0);
+    
+    const lowStockValue = lowStockItems.reduce((sum, fruit) => 
+      sum + (fruit.price || 0) * (fruit.quantity || 0), 0);
+    
+    const avgPrice = totalFruits > 0 ? 
+      fruits.reduce((sum, fruit) => sum + (fruit.price || 0), 0) / totalFruits : 0;
     
     setStats({
       total: totalFruits,
       lowStock: lowStockCount,
-      outOfStock: outOfStockCount
+      outOfStock: outOfStockCount,
+      totalValue: totalValue,
+      lowStockValue: lowStockValue,
+      avgPrice: avgPrice
     });
   }, [fruits, lowStockThreshold]);
-
   const fetchFruits = async () => {
     try {
       setIsLoading(true);
@@ -223,6 +382,142 @@ const InventoryManagement = () => {
       
       // Reset editing state
       setEditingFruit(null);
+      setIsLoading(false);
+    } catch (err) {
+      console.error('Error updating inventory:', err);
+      setError('Failed to update inventory. Please try again.');
+      setIsLoading(false);
+    }
+  };
+  const toggleBulkEditMode = () => {
+    setBulkEditMode(!bulkEditMode);
+    setSelectedFruits([]);
+    setBulkQuantity('');
+  };
+  // Process batch operation on expired items
+const processBatchExpiredItems = async () => {
+  try {
+    setIsLoading(true);
+    setError(null);
+    
+    // Get all expired items
+    const expiredItems = fruits.filter(fruit => 
+      fruit.expiryDate && new Date(fruit.expiryDate) < new Date()
+    );
+    
+    if (expiredItems.length === 0) {
+      setError('No expired items found');
+      setIsLoading(false);
+      return;
+    }
+    
+    const updates = [];
+    
+    // Apply the selected batch action
+    switch (batchAction) {
+      case 'zero-quantity':
+        // Set quantity to 0 for all expired items
+        for (const item of expiredItems) {
+          const response = await axios.put(
+            `http://localhost:3001/api/fruits/${item._id}`,
+            { quantity: 0 }
+          );
+          updates.push(response.data);
+        }
+        break;
+        
+      case 'apply-discount':
+        // Apply discount to all expired items
+        for (const item of expiredItems) {
+          const discountedPrice = (item.price || 0) * (1 - batchDiscount / 100);
+          const response = await axios.put(
+            `http://localhost:3001/api/fruits/${item._id}`,
+            { price: discountedPrice }
+          );
+          updates.push(response.data);
+        }
+        break;
+        
+      case 'delete':
+        // Delete all expired items
+        for (const item of expiredItems) {
+          await axios.delete(`http://localhost:3001/api/fruits/${item._id}`);
+        }
+        break;
+    }
+    
+    // Update local state
+    if (batchAction === 'delete') {
+      // Remove all expired items from state
+      setFruits(prev => prev.filter(fruit => 
+        !(fruit.expiryDate && new Date(fruit.expiryDate) < new Date())
+      ));
+    } else {
+      // Update fruits with new data
+      setFruits(prev => prev.map(fruit => {
+        const updatedFruit = updates.find(u => u._id === fruit._id);
+        return updatedFruit || fruit;
+      }));
+    }
+    
+    // Show success message
+    const actionText = 
+      batchAction === 'zero-quantity' ? 'marked as out of stock' : 
+      batchAction === 'apply-discount' ? `discounted by ${batchDiscount}%` : 'deleted';
+    
+    setSuccessMessage(`${expiredItems.length} expired items successfully ${actionText}!`);
+    setTimeout(() => setSuccessMessage(''), 3000);
+    
+    // Close modal
+    setShowBatchExpiredModal(false);
+    setIsLoading(false);
+  } catch (err) {
+    console.error('Error processing batch operation:', err);
+    setError('Failed to process batch operation. Please try again.');
+    setIsLoading(false);
+  }
+};
+  
+  const toggleFruitSelection = (fruitId) => {
+    setSelectedFruits(prev => 
+      prev.includes(fruitId) 
+        ? prev.filter(id => id !== fruitId) 
+        : [...prev, fruitId]
+    );
+  };
+  
+  const applyBulkUpdate = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      // Validate bulk quantity
+      const quantity = parseInt(bulkQuantity, 10);
+      if (isNaN(quantity) || quantity < 0) {
+        setError('Please enter a valid quantity (0 or positive number)');
+        setIsLoading(false);
+        return;
+      }
+      
+      // Make API calls to update each selected fruit
+      const updatePromises = selectedFruits.map(fruitId => 
+        axios.put(`http://localhost:3001/api/fruits/${fruitId}`, { quantity })
+      );
+      
+      const responses = await Promise.all(updatePromises);
+      
+      // Update local state with new data
+      setFruits(prev => prev.map(fruit => {
+        const updatedFruit = responses.find(r => r.data._id === fruit._id);
+        return updatedFruit ? updatedFruit.data : fruit;
+      }));
+      
+      // Show success message
+      setSuccessMessage(`Updated quantity for ${selectedFruits.length} items successfully!`);
+      setTimeout(() => setSuccessMessage(''), 3000);
+      
+      // Exit bulk edit mode
+      toggleBulkEditMode();
       setIsLoading(false);
     } catch (err) {
       console.error('Error updating inventory:', err);
