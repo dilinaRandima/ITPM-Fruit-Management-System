@@ -18,7 +18,8 @@ const Signup = ({ onSignup }) => {
 const [emailError, setEmailError] = useState('');
 const [passwordError, setPasswordError] = useState('');
 const [confirmPasswordError, setConfirmPasswordError] = useState('');
-
+const [passwordVisible, setPasswordVisible] = useState(false);
+const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   // Add after password state declaration (around line 13)
 const [passwordStrength, setPasswordStrength] = useState({
   score: 0,
@@ -210,6 +211,62 @@ const checkPasswordStrength = (password) => {
           <p>Join our fruit management system for seamless collecting and distribution</p>
         </div>
       </div>
+      <div className="form-group">
+  <label htmlFor="password">Password</label>
+  <div className="password-input-container">
+    <input
+      type={passwordVisible ? "text" : "password"}
+      id="password"
+      value={password}
+      onChange={(e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+        setPasswordError(validatePassword(newPassword));
+        if (confirmPassword) {
+          setConfirmPasswordError(validateConfirmPassword(confirmPassword, newPassword));
+        }
+        setPasswordStrength(checkPasswordStrength(newPassword));
+      }}
+      placeholder="Create a password"
+      required
+    />
+    <span className="input-icon">🔒</span>
+    <button 
+      type="button"
+      className="password-toggle"
+      onClick={() => setPasswordVisible(!passwordVisible)}
+    >
+      {passwordVisible ? '👁️' : '👁️‍🗨️'}
+    </button>
+  </div>
+  {passwordError && <div className="field-error">{passwordError}</div>}
+</div>
+<div className="form-group">
+  <label htmlFor="confirmPassword">Confirm Password</label>
+  <div className="password-input-container">
+    <input
+      type={confirmPasswordVisible ? "text" : "password"}
+      id="confirmPassword"
+      value={confirmPassword}
+      onChange={(e) => {
+        const newConfirmPassword = e.target.value;
+        setConfirmPassword(newConfirmPassword);
+        setConfirmPasswordError(validateConfirmPassword(newConfirmPassword, password));
+      }}
+      placeholder="Confirm your password"
+      required
+    />
+    <span className="input-icon">🔒</span>
+    <button 
+      type="button"
+      className="password-toggle"
+      onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+    >
+      {confirmPasswordVisible ? '👁️' : '👁️‍🗨️'}
+    </button>
+  </div>
+  {confirmPasswordError && <div className="field-error">{confirmPasswordError}</div>}
+</div>
       
       <div className="login-form-section">
         <div className="login-header">
