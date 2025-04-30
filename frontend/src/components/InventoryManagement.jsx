@@ -47,7 +47,10 @@ const [bulkQuantity, setBulkQuantity] = useState('');
   const [stats, setStats] = useState({
     total: 0,
     lowStock: 0,
-    outOfStock: 0
+    outOfStock: 0,
+    totalValue: 0,
+    lowStockValue: 0,
+    avgPrice: 0
   });
 
   useEffect(() => {
@@ -61,16 +64,29 @@ const [bulkQuantity, setBulkQuantity] = useState('');
   // Calculate stats whenever fruits change
   useEffect(() => {
     const totalFruits = fruits.length;
-    const lowStockCount = fruits.filter(fruit => fruit.quantity > 0 && fruit.quantity <= lowStockThreshold).length;
+    const lowStockItems = fruits.filter(fruit => fruit.quantity > 0 && fruit.quantity <= lowStockThreshold);
+    const lowStockCount = lowStockItems.length;
     const outOfStockCount = fruits.filter(fruit => !fruit.quantity || fruit.quantity <= 0).length;
+    
+    // Calculate financial statistics
+    const totalValue = fruits.reduce((sum, fruit) => 
+      sum + (fruit.price || 0) * (fruit.quantity || 0), 0);
+    
+    const lowStockValue = lowStockItems.reduce((sum, fruit) => 
+      sum + (fruit.price || 0) * (fruit.quantity || 0), 0);
+    
+    const avgPrice = totalFruits > 0 ? 
+      fruits.reduce((sum, fruit) => sum + (fruit.price || 0), 0) / totalFruits : 0;
     
     setStats({
       total: totalFruits,
       lowStock: lowStockCount,
-      outOfStock: outOfStockCount
+      outOfStock: outOfStockCount,
+      totalValue: totalValue,
+      lowStockValue: lowStockValue,
+      avgPrice: avgPrice
     });
   }, [fruits, lowStockThreshold]);
-
   const fetchFruits = async () => {
     try {
       setIsLoading(true);
