@@ -537,6 +537,9 @@
   margin-top: 20px;
   color: #666;
   font-size: 14px;
+  padding: 8px;
+  background-color: #f7faf1;
+  border-radius: 6px;
 }
 
 .secure-badge svg {
