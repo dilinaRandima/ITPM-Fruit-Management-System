@@ -23,6 +23,10 @@
   opacity: 0;
   transform: translateY(-10px);
   animation: slideInDown 0.8s forwards 0.2s;
+  transition: color 0.3s ease;
+}
+.checkout-title:hover{
+  color: #8aa548;
 }
 
 .checkout-title:after {
@@ -55,7 +59,7 @@
 .checkout-card {
   background: white;
   border-radius: 15px;
-  padding: 25px;
+  padding: 30px 25px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   animation: fadeInUp 0.8s forwards calc(0.4s + var(--delay, 0s));
   opacity: 0;
@@ -137,6 +141,7 @@
   border-color: #a4bc5a;
   outline: none;
   box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
+  background-color: #fafff7;
 }
 
 /* Card number specific styling */
@@ -532,6 +537,9 @@
   margin-top: 20px;
   color: #666;
   font-size: 14px;
+  padding: 8px;
+  background-color: #f7faf1;
+  border-radius: 6px;
 }
 
 .secure-badge svg {

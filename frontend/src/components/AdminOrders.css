@@ -23,6 +23,7 @@
   opacity: 0;
   transform: translateY(-10px);
   animation: slideInDown 0.8s forwards 0.2s;
+  will-change: opacity, transform;
 }
 
 .admin-title:after {
@@ -98,6 +99,7 @@
 .stat-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .stat-card::before {
@@ -702,12 +704,15 @@
 @media (max-width: 768px) {
   .admin-title {
     font-size: 2rem;
+    padding-bottom: 10px;
   }
   
   .admin-orders-table th:nth-child(3),
   .admin-orders-table td:nth-child(3),
   .admin-orders-table th:nth-child(4),
-  .admin-orders-table td:nth-child(4) {
+  .admin-orders-table td:nth-child(4),
+  .admin-orders-table th:nth-child(5),
+  .admin-orders-table td:nth-child(5) {
     display: none;
   }
   

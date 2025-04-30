@@ -49,6 +49,10 @@
   opacity: 0;
   transform: translateY(-10px);
   animation: slideInDown 0.8s forwards 0.2s;
+  transition: color 0.3s ease;
+}
+.checkout-title:hover {
+  color: #8aa548;
 }
 
 .order-detail-title:after {
@@ -151,7 +155,7 @@
 
 .back-to-orders-button {
   padding: 12px 30px;
-  background: linear-gradient(45deg, #4299e1, #3182ce);
+  background: linear-gradient(45deg, #a1e1a2, #ade1b5);
   color: white;
   border: none;
   border-radius: 8px;
