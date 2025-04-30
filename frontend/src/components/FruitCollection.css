@@ -430,6 +430,7 @@
 .edit-button {
   background: linear-gradient(45deg, #a4bc5a, #8aa548);
   color: white;
+  transition: all 0.25s ease;
 }
 
 .edit-button:hover {
