@@ -169,6 +169,41 @@ const handleImageLoaded = (index) => {
           </div>
         </div>
       </div>
+      {/* Newsletter Signup */}
+<div className="newsletter-section">
+  <div className="newsletter-container">
+    <div className="newsletter-content">
+      <h2>Stay Updated with Fresh News</h2>
+      <p>Subscribe to our newsletter for exclusive offers, seasonal updates, and fruit care tips.</p>
+      
+      <form className="newsletter-form" onSubmit={(e) => {
+        e.preventDefault();
+        alert('Thank you for subscribing to our newsletter!');
+        e.target.reset();
+      }}>
+        <div className="form-group">
+          <input 
+            type="email" 
+            placeholder="Your email address" 
+            required 
+            className="newsletter-input"
+          />
+          <button type="submit" className="newsletter-button">Subscribe</button>
+        </div>
+        <label className="privacy-label">
+          <input type="checkbox" required />
+          <span>I agree to receive marketing emails and accept the <a href="/privacy">Privacy Policy</a></span>
+        </label>
+      </form>
+    </div>
+    <div className="newsletter-image">
+      <div className="fruit-icon fruit-icon-1">🍎</div>
+      <div className="fruit-icon fruit-icon-2">🍊</div>
+      <div className="fruit-icon fruit-icon-3">🍓</div>
+      <div className="fruit-icon fruit-icon-4">🥭</div>
+    </div>
+  </div>
+</div>
       
       {/* Testimonials Section */}
       <div className="testimonials-section">
