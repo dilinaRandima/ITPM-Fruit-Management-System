@@ -123,6 +123,89 @@ const handleImageLoaded = (index) => {
     </div>
   </div>
 ))}
+{/* Featured Products Section */}
+<div className="featured-products-section">
+  <h2 className="section-title fade-in">Featured Fresh Picks</h2>
+  
+  <div className="featured-products-container">
+    {/* Product 1 */}
+    <div className="product-card">
+      <div className="product-badge">Best Seller</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/red-dragon-fruit.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Red Dragon Fruit</h3>
+        <div className="product-rating">★★★★★ <span>(24)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 450.00</span>
+          <span className="original-price">LKR 550.00</span>
+        </div>
+      </div>
+    </div>
+    
+    {/* Product 2 */}
+    <div className="product-card">
+      <div className="product-badge">New</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/mango-king.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Premium King Mango</h3>
+        <div className="product-rating">★★★★☆ <span>(18)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 380.00</span>
+        </div>
+      </div>
+    </div>
+    
+    {/* Product 3 */}
+    <div className="product-card">
+      <div className="product-badge">Sale</div>
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/avocado-hass.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Hass Avocado</h3>
+        <div className="product-rating">★★★★★ <span>(32)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 290.00</span>
+          <span className="original-price">LKR 350.00</span>
+        </div>
+      </div>
+    </div>
+    
+    {/* Product 4 */}
+    <div className="product-card">
+      <div className="product-image" style={{ backgroundImage: "url('/images/products/organic-banana.jpg')" }}>
+        <div className="product-actions">
+          <button className="action-button">Quick View</button>
+          <button className="action-button">Add to Cart</button>
+        </div>
+      </div>
+      <div className="product-info">
+        <h3>Organic Banana Bunch</h3>
+        <div className="product-rating">★★★★☆ <span>(15)</span></div>
+        <div className="product-price">
+          <span className="current-price">LKR 180.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div className="view-more-container">
+    <button className="view-more-button">View All Products</button>
+  </div>
+</div>
           
           <div className="gallery-indicators">
             {galleryImages.map((_, index) => (
