@@ -442,6 +442,7 @@
 .delete-button {
   background: linear-gradient(45deg, #E53E3E, #C53030);
   color: white;
+  transition: all 0.25s ease;
 }
 
 .delete-button:hover {
