@@ -135,6 +135,11 @@ const FruitCollection = () => {
   };
 
   const saveChanges = async () => {
+    // Validate before saving
+    if (!validateExpiryDate(editingFruit.expiryDate)) {
+      return; // Don't proceed if invalid
+    }
+    
     try {
       setIsLoading(true);
       
