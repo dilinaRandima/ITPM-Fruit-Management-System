@@ -123,6 +123,11 @@ const FruitCollection = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === 'expiryDate') {
+      validateExpiryDate(value);
+    }
+    
     setEditingFruit({
       ...editingFruit,
       [name]: name === 'price' ? parseFloat(value) : value
