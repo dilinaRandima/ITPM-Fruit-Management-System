@@ -146,6 +146,76 @@ const handleImageLoaded = (index) => {
         </div>
       </div>
     </div>
+    {/* Quality Metrics Section */}
+<div className="quality-metrics-section">
+  <div className="quality-content">
+    <h2 className="section-title">Our Quality Standards</h2>
+    <p className="quality-description">
+      We utilize advanced AI technology to ensure only the finest fruits reach your table. 
+      Every piece is carefully graded based on these key metrics:
+    </p>
+    
+    <div className="metrics-container">
+      {/* Color Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">🎨</div>
+        <div className="metric-info">
+          <h3>Color Analysis</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '92%' }}>
+              <span className="metric-value">92%</span>
+            </div>
+          </div>
+          <p>Our color analysis ensures fruits have reached optimal ripeness</p>
+        </div>
+      </div>
+      
+      {/* Shape Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">📏</div>
+        <div className="metric-info">
+          <h3>Shape Perfection</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '87%' }}>
+              <span className="metric-value">87%</span>
+            </div>
+          </div>
+          <p>We select fruits with consistent and ideal shapes</p>
+        </div>
+      </div>
+      
+      {/* Texture Quality */}
+      <div className="metric-card">
+        <div className="metric-icon">👆</div>
+        <div className="metric-info">
+          <h3>Texture Assessment</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '95%' }}>
+              <span className="metric-value">95%</span>
+            </div>
+          </div>
+          <p>Texture analysis ensures the perfect bite every time</p>
+        </div>
+      </div>
+      
+      {/* Defect Detection */}
+      <div className="metric-card">
+        <div className="metric-icon">🔍</div>
+        <div className="metric-info">
+          <h3>Defect Detection</h3>
+          <div className="metric-bar-container">
+            <div className="metric-bar" style={{ width: '99%' }}>
+              <span className="metric-value">99%</span>
+            </div>
+          </div>
+          <p>Our AI detects even the smallest imperfections</p>
+        </div>
+      </div>
+    </div>
+    
+    <button className="learn-more-button">Learn About Our Process</button>
+  </div>
+</div>
     
     {/* Product 2 */}
     <div className="product-card">
