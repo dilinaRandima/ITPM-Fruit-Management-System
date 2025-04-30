@@ -20,7 +20,8 @@ const [passwordError, setPasswordError] = useState('');
 const [confirmPasswordError, setConfirmPasswordError] = useState('');
 const [passwordVisible, setPasswordVisible] = useState(false);
 const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  // Add after password state declaration (around line 13)
+const [termsAccepted, setTermsAccepted] = useState(false);
+const [termsError, setTermsError] = useState('');
 const [passwordStrength, setPasswordStrength] = useState({
   score: 0,
   message: '',
@@ -45,6 +46,27 @@ const [passwordStrength, setPasswordStrength] = useState({
       setError('Please enter a valid email address');
       return false;
     }
+    if (!termsAccepted) {
+      setTermsError('You must accept the Terms and Conditions');
+      return false;
+    }
+    
+    // Add before the main submit button (around line 173)
+    <div className="terms-container">
+      <label className="terms-label">
+        <input
+          type="checkbox"
+          checked={termsAccepted}
+          onChange={(e) => {
+            setTermsAccepted(e.target.checked);
+            if (e.target.checked) setTermsError('');
+          }}
+        />
+        <span>I agree to the <a href="/terms" target="_blank">Terms and Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a></span>
+      </label>
+      {termsError && <div className="field-error">{termsError}</div>}
+    </div>
+    
 
     // Validate password length
     if (password.length < 8) {
