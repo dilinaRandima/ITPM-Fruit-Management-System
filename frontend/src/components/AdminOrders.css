@@ -23,6 +23,7 @@
   opacity: 0;
   transform: translateY(-10px);
   animation: slideInDown 0.8s forwards 0.2s;
+  will-change: opacity, transform;
 }
 
 .admin-title:after {
