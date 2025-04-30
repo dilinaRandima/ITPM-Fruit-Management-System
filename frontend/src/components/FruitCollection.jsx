@@ -481,7 +481,7 @@ const FruitCollection = () => {
                           <button 
                             className="save-button" 
                             onClick={saveChanges}
-                            disabled={isLoading}
+                            disabled={isLoading || !isFormValid}
                           >
                             Save Changes
                           </button>
