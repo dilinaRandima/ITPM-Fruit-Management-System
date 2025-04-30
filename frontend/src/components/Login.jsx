@@ -85,6 +85,7 @@ const [passwordError, setPasswordError] = useState('');
       }
     }
   }, [navigate, onLogin]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,6 +99,18 @@ const [passwordError, setPasswordError] = useState('');
 
     try {
       setIsLoading(true);
+      <button 
+  type="submit" 
+  className={`login-button ${isLoading ? 'login-loading' : ''}`}
+  disabled={isLoading}
+>
+  {isLoading ? (
+    <>
+      <span className="spinner"></span>
+      <span>Signing In...</span>
+    </>
+  ) : 'Sign In'}
+</button>
       
       // Use the mock authentication for now
       const response = await authenticateUser(email, password, selectedRole);
