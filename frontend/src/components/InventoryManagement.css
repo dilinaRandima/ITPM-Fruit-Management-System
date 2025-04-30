@@ -1142,6 +1142,78 @@ input[type="file"] {
   box-shadow: 0 6px 15px rgba(229, 62, 62, 0.4);
 }
 
+/* Add after the loading indicator styles */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+.skeleton-image {
+  height: 50px;
+  width: 50px;
+}
+
+.skeleton-badge {
+  height: 24px;
+  width: 80px;
+  border-radius: 20px;
+}
+
+.skeleton-card {
+  height: 100px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.skeleton-stat {
+  height: 120px;
+  border-radius: 10px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(164, 188, 90, 0.3);
+  border-radius: 50%;
+  border-top-color: #a4bc5a;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 /* Report modal styling */
 .report-modal {
   max-width: 500px;
