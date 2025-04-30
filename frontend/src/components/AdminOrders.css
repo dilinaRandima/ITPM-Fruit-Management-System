@@ -704,12 +704,15 @@
 @media (max-width: 768px) {
   .admin-title {
     font-size: 2rem;
+    padding-bottom: 10px;
   }
   
   .admin-orders-table th:nth-child(3),
   .admin-orders-table td:nth-child(3),
   .admin-orders-table th:nth-child(4),
-  .admin-orders-table td:nth-child(4) {
+  .admin-orders-table td:nth-child(4),
+  .admin-orders-table th:nth-child(5),
+  .admin-orders-table td:nth-child(5) {
     display: none;
   }
   
