@@ -1345,9 +1345,9 @@ input[type="file"] {
 }
 
 .generate-button:hover {
-  background: linear-gradient(45deg, #3182ce, #2c5282);
+  background: linear-gradient(45deg, #163d61, #105156);
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(66, 153, 225, 0.4);
+  box-shadow: 0 6px 15px rgba(54, 159, 246, 0.4);
 }
 
 /* NEW - Transaction Styling */
@@ -1372,11 +1372,11 @@ input[type="file"] {
 }
 
 .transaction-card {
-  background: white;
+  background: rgb(71, 33, 33);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f0f0f0;
+  border: 1px solid #591a1a;
   animation: fadeInUp 0.5s forwards;
   opacity: 0;
   transform: translateY(10px);
