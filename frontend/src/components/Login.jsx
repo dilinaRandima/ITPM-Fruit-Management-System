@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 // Demo credentials for testing - removed transporter
 const VALID_CREDENTIALS = {
   'customer@gmail.com': { password: 'customer123', role: 'customer', name: 'Dilina Randima' },
@@ -21,6 +20,9 @@ const Login = ({ onLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [emailError, setEmailError] = useState('');
 const [passwordError, setPasswordError] = useState('');
+const [retryCount, setRetryCount] = useState(0);
+const maxRetries = 2; // Maximum number of automatic retries
+const retryTimeoutRef = useRef(null);
   // Mock authentication function - will be replaced with actual API call later
   const authenticateUser = async (email, password, role) => {
     // This simulates an API call
@@ -40,6 +42,7 @@ const [passwordError, setPasswordError] = useState('');
           // Use the appropriate user info based on where it was found
           const validUserInfo = userInfo || registeredUserInfo;
           
+          
           resolve({
             success: true,
             user: {
@@ -58,6 +61,8 @@ const [passwordError, setPasswordError] = useState('');
       }, 1000); // Simulate network delay
     });
   };
+  
+  
   useEffect(() => {
     // Check for existing token and user data
     const token = localStorage.getItem('token');
@@ -85,7 +90,48 @@ const [passwordError, setPasswordError] = useState('');
       }
     }
   }, [navigate, onLogin]);
+  const handleAuthError = (err) => {
+    // Clear any existing retry timeout
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current);
+    }
+    
+    // Determine error type and display appropriate message
+    if (!navigator.onLine) {
+      setError('You appear to be offline. Please check your internet connection.');
+    } else if (err.message && err.message.includes('timeout')) {
+      setError('Server is taking too long to respond. Please try again later.');
+      
+      // Auto-retry logic for timeouts
+      if (retryCount < maxRetries) {
+        setError(`Connection timed out. Retrying (${retryCount + 1}/${maxRetries})...`);
+        retryTimeoutRef.current = setTimeout(() => {
+          setRetryCount(prev => prev + 1);
+          handleSubmit(new Event('autoRetry'));
+        }, 2000); // Wait 2 seconds before retry
+      } else {
+        setError('Unable to connect after multiple attempts. Please try again later.');
+        setRetryCount(0); // Reset for next manual attempt
+      }
+    } else {
+      // Generic error with technical details in console for debugging
+      setError('An unexpected error occurred. Please try again.');
+      console.error('Login error details:', err);
+    }
+  };
   
+  // Modify the catch block in handleSubmit around line 66
+  
+  
+  // Add cleanup for any pending retries when component unmounts
+  // Place this after the first useEffect
+  useEffect(() => {
+    return () => {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -142,6 +188,7 @@ const [passwordError, setPasswordError] = useState('');
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="login-container">
