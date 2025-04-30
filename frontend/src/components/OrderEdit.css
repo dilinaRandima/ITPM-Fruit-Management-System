@@ -463,6 +463,9 @@
 
 .cancel-button, 
 .save-button {
+  background: linear-gradient(45deg, #a4bc5a, #8aa548);
+  color: white;
+  border: none;
   padding: 12px 30px;
   border-radius: 8px;
   font-size: 16px;
